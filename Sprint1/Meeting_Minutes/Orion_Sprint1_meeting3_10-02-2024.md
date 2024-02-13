@@ -1,5 +1,5 @@
 # Orion Team meeting 3 10/02/2024
-This team meeting was done on discord online 
+This team meeting was done on discord online from 22:00 to 22:30 (total: 30min)
 
 Each team member spoke about what they will be working on for the day:
 
