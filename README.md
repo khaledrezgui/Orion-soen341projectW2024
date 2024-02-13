@@ -9,7 +9,7 @@ The objective of this project is to create a workeable website for a car rental 
 | Team member | ID | email | Role |
 |-----|-----|-----|-----|
 |Matia Komsic|40175388|-----|-----|
-|Jandon Games|40173613|-----|-----|
+|Jandon Games|40173613|jadongames7@gmail.com|Full Stack|
 |Khaled Rezgui|40176606|-----|-----|
 |-----|-----|-----|-----|
 
