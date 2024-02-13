@@ -15,4 +15,4 @@ The objective of this project is to create a workeable website for a car rental 
 
 
 # Technologies used
-...
+MongoDB, Express.js, React.js, Node.js
