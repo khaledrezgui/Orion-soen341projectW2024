@@ -16,7 +16,7 @@ This car rental application makes it easy for customers to rent vehicles by allo
 # How to run the app
 First of all, make sure you have [Node](https://nodejs.org/en) installed into your system. 
 
-After cloning the repos, open terminal and enter the "car_rental_all" which is inside the "frontend" repos. 
+After cloning the repos, open terminal and enter the "car_rental_app" which is inside the "frontend" repos. 
 ```
 cd frontend
 cd car_rental_app
