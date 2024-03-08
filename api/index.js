@@ -1,6 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const authRoute = require("./routes/auth.js");
+const usersRoute = require("./routes/users.js");
+const carsRoute = require("./routes/cars.js");
+
 const app = express();
 dotenv.config();
 
@@ -13,14 +17,14 @@ const connect = async () => {
     }
 };
 
-mongoose.connection.on("disconnected",()=>{
+mongoose.connection.on("disconnected", () => {
     console.log("mongoDB disconnected!")
 })
 
-mongoose.connection.on("connected",()=>{
-    console.log("mongoDB connected!")
-})
-
+//middlewares
+app.use("/api/auth", authRoute);
+app.use("/api/users", authRoute);
+app.use("/api/cars", authRoute);
 
 app.listen(8800, () => {
     connect()
