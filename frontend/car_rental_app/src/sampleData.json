@@ -1,0 +1,93 @@
+{
+    "cars": [
+      {
+        "make": "Toyota",
+        "model": "Corolla",
+        "year": 2017,
+        "time": "Morning",
+        "type": "Convertible",
+        "price": "$47.24/hr",
+        "poster" : ""
+      },
+      {
+        "make": "Nissan",
+        "model": "Frontier",
+        "year": 2018,
+        "time": "Morning",
+        "type": "Coupe",
+        "price": "24.54",
+        "poster" : ""
+
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "S-Class",
+        "year": 2005,
+        "time": "Afternoon",
+        "type": "Truck",
+        "price": "47.66",
+        "poster" : ""
+
+      },
+      {
+        "make": "Mercedes-Benz",
+        "model": "C-Class",
+        "year": 2021,
+        "time": "All day",
+        "type": "Truck",
+        "price": "46.00",
+        "poster" : ""
+
+      },
+      {
+        "make": "Hyundai",
+        "model": "Tucson",
+        "year": 2001,
+        "time": "Afternoon",
+        "type": "SUV",
+        "price": "45.73",
+        "poster" : ""
+
+      },
+      {
+        "make": "Volkswagen",
+        "model": "Tiguan",
+        "year": 2003,
+        "time": "Morning",
+        "type": "Convertible",
+        "price": "22.00",
+        "poster" : ""
+
+      },
+      {
+        "make": "BMW",
+        "model": "1 Series",
+        "year": 2000,
+        "time": "Afternoon",
+        "type": "Convertible",
+        "price": "27.13",
+        "poster" : ""
+
+      },
+      {
+        "make": "Nissan",
+        "model": "Altima",
+        "year": 2018,
+        "time": "Afternoon",
+        "type": "Coupe",
+        "price": "48.06",
+        "poster" : ""
+
+      },
+      {
+        "make": "Chevrolet",
+        "model": "Silverado",
+        "year": 2019,
+        "time": "All day",
+        "type": "Truck",
+        "price": "$47.37/hr",
+        "poster" : ""
+      }
+    ]
+  }
+  
