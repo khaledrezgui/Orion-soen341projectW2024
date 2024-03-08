@@ -5,7 +5,7 @@ const router = express.Router();
 //CREATE
 router.post("/", async (req, res) => {
 
-    const newCar = new Car(req.body)
+    const newCar = new Car(req.body);
 
     try {
         const savedCar = await newCar.save();
@@ -30,7 +30,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
 
     try {
-        const updatedCar = await Car.findByIdAndDelete(req.params.id);
+        await Car.findByIdAndDelete(req.params.id);
         res.status(200).json("Car has been deleted.");
     } catch (err) {
         res.status(500).json(err);
@@ -49,13 +49,13 @@ router.get("/:id", async (req, res) => {
 });
 
 //GET ALL
-router.get("/", async (req, res) => {
-
+router.get("/", async (req, res, next) => {
+   
     try {
         const cars = await Car.find();
         res.status(200).json(cars);
     } catch (err) {
-        res.status(500).json(err);
+        next(err);
     }
 });
 

@@ -5,7 +5,7 @@ const router = express.Router();
 //CREATE
 router.post("/", async (req, res) => {
 
-    const newUser = new User(req.body)
+    const newUser = new User(req.body);
 
     try {
         const savedUser = await newUser.save();
