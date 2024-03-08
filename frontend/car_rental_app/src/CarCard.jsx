@@ -1,28 +1,26 @@
-import React from "react";
+import React from 'react';
 
-const CarCard = ({ car1 }) => {
-
-
-return (
-
-    <div className='car'>
+// Assuming each car object has a unique identifier, make, model, year, type, time, and price
+const CarCard = ({ car: { id, make, model, year, type, time, price } }) => {
+  return (
+    <div className="car" key={id}>
       <div>
-        <p>{car1.year}</p>
+        <p>{year}</p>
       </div>
+
+      {}
       <div>
-        <img src={car1.poster !== "NA" ? car1.poster : 'https://via.placeholder.com/400'} alt = {car1.make}/>
+        <img src="https://via.placeholder.com/400" alt={`${make} ${model}`} />
       </div>
+
       <div>
-        <span>
-          {car1.price}
-        </span>
-        <h3>{car1.make}</h3>
+        <span>{type}</span>
+        <h3>{`${make} ${model}`}</h3>
+        <p>Available: {time}</p>
+        <p>Rental Price: ${parseFloat(price).toFixed(2)}/hr</p>
       </div>
-      
     </div>
-
-);
-
+  );
 }
 
-export default CarCard; 
+export default CarCard;
