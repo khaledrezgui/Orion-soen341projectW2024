@@ -13,6 +13,19 @@ This car rental application makes it easy for customers to rent vehicles by allo
 |Khaled Rezgui|40176606|khaledrezguipro@gmail.com|Full Stack|
 |Safaa Kentaoui|40228872|s_kentao@live.ca|Full Stack|
 
+# How to run the app
+First of all, make sure you have [Node](https://nodejs.org/en) installed into your system. 
+
+After cloning the repos, open terminal and enter the "car_rental_app" which is inside the "frontend" repos. 
+```
+cd frontend
+cd car_rental_app
+```
+Then, you can run the front end application by doing:
+```
+npm run start
+```
+You will then be able to run the application on a local host. 
 
 # Technologies used
 MongoDB, Express.js, React.js, Node.js

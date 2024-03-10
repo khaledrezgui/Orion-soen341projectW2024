@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+
+:root {
+  --font-roboto: "Roboto Slab", serif;
+  --font-raleway: "Raleway", sans-serif;
+}
+
+.carbrowsing {
+  font-family: var(--font-roboto);
+  background-color: #212426;
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff; /* Ensure text color is styled for visibility */
+  min-height: 100vh; /* Ensure the component covers the viewport height */
+}
+
+.carbrowsing h1 {
+  font-size: 3rem;
+  letter-spacing: 0.9px;
+  color: transparent; /* Keep the text fill transparent for the clipping effect */
+  background: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+.carbrowsing .search {
+  width: 100%;
+  max-width: 600px; /* Adjust based on your design preference */
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: #1f2123;
+  padding: 12px 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.carbrowsing .car button {
+  padding: 10px 15px;
+  margin-top: 10px;
+  background-color: #04AA6D; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.carbrowsing .car button:hover {
+  background-color: #037d56; 
+}
+
+
+.carbrowsing .search input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 8px 15px;
+  font-size: 16px;
+  color: #a1a1a1;
+  font-family: var(--font-raleway);
+}
+
+.carbrowsing .search img {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+.carbrowsing .empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #f9d3b4;
+}
+
+.carbrowsing .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.carbrowsing .car {
+  width: 300px;
+  background: #343739;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.carbrowsing .car:hover {
+  transform: scale(1.05);
+}
+
+.carbrowsing .car img {
+  width: 100%;
+  display: block;
+}
+
+.carbrowsing .car div {
+  padding: 15px;
+  color: #ffffff;
+}
+
+.carbrowsing .car h3, 
+.carbrowsing .car p {
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .carbrowsing {
+    padding: 2rem;
+  }
+
+  .carbrowsing .search {
+    padding: 10px;
+  }
+
+  .carbrowsing .search input {
+    font-size: 14px;
+  }
+
+  .carbrowsing .car {
+    width: 90%;
+  }
+}

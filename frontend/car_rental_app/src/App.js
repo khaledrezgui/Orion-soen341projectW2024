@@ -1,60 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
-import sampleData from './sampleData.json'; 
-import searchIcon from './search.svg';
-import CarCard from './CarCard';
-
-const car1 =       {
-  "make": "Toyota",
-  "model": "Corolla",
-  "year": 2017,
-  "time": "Morning",
-  "type": "Convertible",
-  "price": "$47.24/hr",
-  "poster" : "NA"
-}
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginForm from './Components/LoginForm/LoginForm';
+import RegisterForm from './Components/RegisterForm/RegisterForm';
+import CarBrowsing from './Components/CarBrowsing/CarBrowsing';
+import CarReservation from './Components/CarReservation/CarReservation';
+import NavBar from './Components/NavBar/NavBar';
 
 function App() {
-
-  const[cars, setCars] = useState([]);
-
-  const searchCars = (title) => {
-    // Filter the cars array for the car make that matches the title
-    const filteredCars = sampleData.cars.filter(car => car.make === title);
-
-    setCars(filteredCars); 
-  }
-
-  useEffect(() => {
-    searchCars('Toyota');
-  }, [])
-
   return (
-
-<div className="app">
-
-  <h1>Car Rental</h1>
-  <div className="search">
-    <input 
-    placeholder='Search For Cars'
-    value=""
-    onChange={() => {}}
-    />
-    <img 
-    src={searchIcon}
-    alt='search'
-    onClick={() => {}}
-    />
-  </div>
-
-  <div className='container'>
-
-    <CarCard car1={cars[0]} />
-
-  </div>
-
-</div>
-
+    <Router>
+        <NavBar />
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/browse" element={<CarBrowsing />} />
+        <Route path="/bookcar" element={<CarReservation />} />
+      </Routes>
+    </Router>
   );
 }
 
