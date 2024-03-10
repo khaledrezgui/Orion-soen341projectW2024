@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Assuming each car object has a unique identifier, make, model, year, type, time, and price
 const CarCard = ({ car: { id, make, model, year, type, time, price } }) => {
   return (
     <div className="car" key={id}>
@@ -18,6 +17,7 @@ const CarCard = ({ car: { id, make, model, year, type, time, price } }) => {
         <h3>{`${make} ${model}`}</h3>
         <p>Available: {time}</p>
         <p>Rental Price: ${parseFloat(price).toFixed(2)}/hr</p>
+        <button >Book Reservation</button>
       </div>
     </div>
   );
