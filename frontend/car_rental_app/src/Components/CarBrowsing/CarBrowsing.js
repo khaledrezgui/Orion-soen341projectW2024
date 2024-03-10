@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import CarCard from "./CarCard"; 
-import SearchIcon from "./pictures/search.svg";
+import SearchIcon from '../../pictures/search.svg';
 import "./CarBrowsing.css";
-import sampleData from './sampleData.json'; 
+import sampleData from '../../sampleData.json'; 
 
 const CarBrowsing = () => {
   const [searchTerm, setSearchTerm] = useState("");
