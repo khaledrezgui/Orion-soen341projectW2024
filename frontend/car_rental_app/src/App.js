@@ -1,51 +1,20 @@
-import React, { useState } from "react";
-import CarCard from "./CarCard"; 
-import SearchIcon from "./search.svg";
-import "./App.css";
-import sampleData from './sampleData.json'; 
+import React from 'react';
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginForm from './Components/LoginForm/LoginForm';
+import RegisterForm from './Components/RegisterForm/RegisterForm';
+import CarBrowsing from './CarBrowsing';
 
-const App = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [cars, setCars] = useState(sampleData.cars); 
-
-  // Function to filter cars based on the search term
-  const searchCars = (term) => {
-    const filteredCars = sampleData.cars.filter((car) =>
-      `${car.make} ${car.model}`.toLowerCase().includes(term.toLowerCase())
-    );
-    setCars(filteredCars);
-  };
-
+function App() {
   return (
-    <div className="app">
-      <h1>Car Rental App</h1>
-
-      <div className="search">
-        <input
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search for cars"
-        />
-        <img
-          src={SearchIcon}
-          alt="search"
-          onClick={() => searchCars(searchTerm)}
-        />
-      </div>
-
-      {cars?.length > 0 ? (
-        <div className="container">
-          {cars.map((car, index) => (
-            <CarCard key={index} car={car} /> // Render CarCard for each car
-          ))}
-        </div>
-      ) : (
-        <div className="empty">
-          <h2>No cars found</h2>
-        </div>
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/browse" element={<CarBrowsing />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;
