@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const {createCar,
     updateCar,
     deleteCar,
     getCar,
-    getCars} = require("../controllers/car.js");
-const Car = require("../models/Car.js");
+    getCars,} = require('../controllers/car.js');
+const Car = require('../models/Car.js');
 const router = express.Router();
 
 //CREATE

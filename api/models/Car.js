@@ -25,19 +25,19 @@ const CarSchema = new mongoose.Schema({
     description:{
         type:String,
         required:true
-    }
-    // photos:{
-    //     type:[String],
+    },
+    photos:{
+        type:[String],
         
-    // },
-    // price:{
-    //     type:Number,
-    //     required:true
-    // },
-    // seats:{
-    //     type:Number,
-    //     required:true
-    // },
+    },
+    price:{
+        type:Number,
+        required:true
+    },
+    seats:{
+        type:Number,
+        required:true
+    },
     // availability:{
     //     type:Boolean,
     //     default:true

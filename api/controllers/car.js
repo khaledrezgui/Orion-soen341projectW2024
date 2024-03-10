@@ -1,5 +1,5 @@
 
-const Car = require("../models/Car.js");
+const Car = require("../models/Car");
 
 
 const createCar = async (req,res,next)=>{
@@ -11,7 +11,7 @@ const createCar = async (req,res,next)=>{
     } catch (err) {
         next(err);
     }
-}
+};
 
 
 const updateCar = async (req,res,next)=>{
@@ -21,7 +21,7 @@ const updateCar = async (req,res,next)=>{
     } catch (err) {
         next(err);
     }
-}
+};
 
 const deleteCar = async (req,res,next)=>{
     try {
@@ -30,7 +30,7 @@ const deleteCar = async (req,res,next)=>{
     } catch (err) {
         next(err);
     }
-}
+};
 
 const getCar = async (req,res,next)=>{
     try {
@@ -39,7 +39,7 @@ const getCar = async (req,res,next)=>{
     } catch (err) {
         next(err);
     }
-}
+};
 
 const getCars = async (req,res,next)=>{
     try {
@@ -48,6 +48,6 @@ const getCars = async (req,res,next)=>{
     } catch (err) {
         next(err);
     }
-}
+};
 
-module.exports = { createCar, updateCar, deleteCar, getCar, getCars };
+module.exports = { createCar, updateCar, deleteCar, getCar, getCars, };

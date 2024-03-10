@@ -1,6 +1,11 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-
+const createError = (status, message) => {
+    const err = new Error();
+    err.status = status;
+    err.message = message;
+    return err;
+};
 const register = async (req,res,next)=>{
    try{
     const salt =bcrypt.genSaltSync(10);
@@ -18,9 +23,6 @@ const register = async (req,res,next)=>{
    }
 }
 
-module.exports = register;
-
-
 const login = async (req,res,next)=>{
     try{
      const user = await User.findOne({username:req.body.username});
@@ -28,7 +30,7 @@ const login = async (req,res,next)=>{
 
      const isPasswordCorrect = await bcrypt.compare(req.body.password,user.password);
      if (!isPasswordCorrect) 
-        return next(createError(400,"Wrong password or username!"));
+        return next(createError (400,"Wrong password or username!"));
 
     
     const {password, isAdmin,...otherDetails} = user._doc;
@@ -38,4 +40,4 @@ const login = async (req,res,next)=>{
     }
  }
  
- module.exports = register;
+ module.exports = { register, login, };
