@@ -9,6 +9,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +26,9 @@ const LoginForm = () => {
         navigate('/browse'); // Redirect to the browse page on successful login
       }
     } catch (err) {
-      console.error('Login failed:', err);
-      
+        
+       setErrorMessage("Login failed. Try again or register") 
+      console.error('Login failed:', err);     
     }
   };
 
@@ -33,6 +36,7 @@ const LoginForm = () => {
     <div className="wrapper">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         <div className="input-box">
           <input 
             type="text"

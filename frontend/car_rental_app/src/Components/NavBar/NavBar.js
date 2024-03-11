@@ -7,13 +7,10 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <Link to="/browse" className="navbar-logo">
         <img src={logo} alt="App Logo" /> 
         </Link>
         <ul className="nav-menu">
-          <li className="nav-item">
-            <Link to="/browse" className="nav-links">Browse</Link>
-          </li>
           <li className="nav-item">
             <Link to="/login" className="nav-links">Login</Link>
           </li>
