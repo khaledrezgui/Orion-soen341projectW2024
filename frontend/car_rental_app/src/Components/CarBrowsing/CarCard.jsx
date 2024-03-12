@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CarCard = ({ car: { _id, make, model, year, type, time, price, description, photos, seats } }) => {
+const CarCard = ({ car: { _id, make, model, year, type, time, price, description, photos, seats, availability } }) => {
   return (
     <div className="car" key={_id}>
       <div>
@@ -16,7 +16,13 @@ const CarCard = ({ car: { _id, make, model, year, type, time, price, description
         <p>Rental Price: ${parseFloat(price).toFixed(2)}/hr</p>
         <p>{description}</p>
         <p>Seats: {seats}</p>
-        <button>Book Reservation</button>
+
+        {availability ? (
+          <button>Book Reservation</button>
+        ) : (
+
+          <p style={{ color: 'red' }}>Car already rented</p>
+          )}
       </div>
     </div>
   );

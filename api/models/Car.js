@@ -37,10 +37,10 @@ const CarSchema = new mongoose.Schema({
         required: true
     },
     
-    availability: [{
-        start: Date,
-        end: Date
-    }]
+    availability: {
+    type: Boolean,
+    required: true    
+    },
 
 });
 
