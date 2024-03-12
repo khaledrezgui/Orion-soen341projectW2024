@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
+require('dotenv').config(); 
 const createError = (status, message) => {
     const err = new Error();
     err.status = status;
@@ -32,7 +34,12 @@ const login = async (req,res,next)=>{
      if (!isPasswordCorrect) 
         return next(createError (400,"Wrong password or username!"));
 
-    
+        const token = jwt.sign(
+            { id: user._id, isAdmin: user.isAdmin },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" } // Token expires in 1 hour
+        );
+
     const {password, isAdmin,...otherDetails} = user._doc;
      res.status(200).json({...otherDetails});
     }catch(err){

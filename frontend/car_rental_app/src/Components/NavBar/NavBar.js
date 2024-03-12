@@ -8,6 +8,7 @@ const NavBar = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
 
   const handleLogout = () => {
+    localStorage.removeItem('token');
     localStorage.removeItem('isLoggedIn');
     navigate('/login'); // Redirect to the login page after logout
   };
