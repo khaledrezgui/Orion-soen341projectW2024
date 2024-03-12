@@ -3,132 +3,90 @@
     "make": "Volkswagen",
     "model": "Atlas",
     "year": "2005",
-    "time": "Evening",
     "type": "Convertible",
     "price": 45.74,
     "description": "A spacious convertible.",
     "photos": [],
-    "availability": true,
+    "availability": {
+      "start": "2023-01-01T00:00:00.000Z",
+      "end": "2023-12-31T23:59:59.999Z"
+    },
+    "isAvailable": true,
     "seats": 5
   },
   {
     "make": "Hyundai",
     "model": "Tucson",
     "year": "2018",
-    "time": "Afternoon",
     "type": "Truck",
     "price": 44.68,
     "description": "Reliable family truck.",
     "photos": [],
-    "availability": true,
+    "availability": {
+      "start": "2023-03-01T00:00:00.000Z",
+      "end": "2023-08-31T23:59:59.999Z"
+    },
+    "isAvailable": true,
     "seats": 5
   },
   {
     "make": "Honda",
     "model": "CR-V",
     "year": "2011",
-    "time": "Evening",
     "type": "Coupe",
     "price": 46.68,
     "description": "Economical and efficient coupe.",
     "photos": [],
-    "availability": true,
+    "availability": {
+      "start": "2023-04-01T00:00:00.000Z",
+      "end": "2023-09-30T23:59:59.999Z"
+    },
+    "isAvailable": true,
     "seats": 5
   },
   {
     "make": "Mercedes-Benz",
     "model": "S-Class",
     "year": "2022",
-    "time": "Afternoon",
     "type": "Sedan",
     "price": 41.86,
     "description": "Luxury and elegance defined.",
     "photos": [],
-    "availability": true,
+    "availability": {
+      "start": "2023-01-15T00:00:00.000Z",
+      "end": "2023-11-15T23:59:59.999Z"
+    },
+    "isAvailable": true,
     "seats": 5
   },
   {
     "make": "Toyota",
     "model": "RAV4",
     "year": "2018",
-    "time": "Evening",
     "type": "Sedan",
     "price": 45.17,
     "description": "Durable all-terrain sedan.",
     "photos": [],
-    "availability": true,
+    "availability": {
+      "start": "2023-05-01T00:00:00.000Z",
+      "end": "2023-10-31T23:59:59.999Z"
+    },
+    "isAvailable": true,
     "seats": 5
   },
   {
     "make": "Ford",
     "model": "Explorer",
     "year": "2019",
-    "time": "All day",
     "type": "Convertible",
     "price": 10.02,
     "description": "Adventurous spirit convertible.",
     "photos": [],
-    "availability": true,
-    "seats": 7
-  },
-  {
-    "make": "Nissan",
-    "model": "Altima",
-    "year": "2016",
-    "time": "All day",
-    "type": "Coupe",
-    "price": 20.67,
-    "description": "Stylish and sporty coupe.",
-    "photos": [],
-    "availability": true,
-    "seats": 5
-  },
-  {
-    "make": "Honda",
-    "model": "Odyssey",
-    "year": "2006",
-    "time": "Morning",
-    "type": "SUV",
-    "price": 43.39,
-    "description": "Spacious family SUV.",
-    "photos": [],
-    "availability": true,
-    "seats": 7
-  },
-  {
-    "make": "Nissan",
-    "model": "Altima",
-    "year": "2013",
-    "time": "Evening",
-    "type": "Truck",
-    "price": 26.25,
-    "description": "Efficient and reliable truck.",
-    "photos": [],
-    "availability": true,
-    "seats": 5
-  },
-  {
-    "make": "Mercedes-Benz",
-    "model": "S-Class",
-    "year": "2004",
-    "time": "All day",
-    "type": "Sedan",
-    "price": 44.74,
-    "description": "Classic luxury sedan.",
-    "photos": [],
-    "availability": true,
-    "seats": 5
-  },
-  {
-    "make": "Honda",
-    "model": "Odyssey",
-    "year": "2003",
-    "time": "All day",
-    "type": "Convertible",
-    "price": 15.37,
-    "description": "Versatile family convertible.",
-    "photos": [],
-    "availability": true,
+    "availability": {
+      "start": "2023-06-01T00:00:00.000Z",
+      "end": "2023-12-20T23:59:59.999Z"
+    },
+    "isAvailable": false,
     "seats": 7
   }
 ]
