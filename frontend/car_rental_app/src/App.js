@@ -19,7 +19,7 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/browse" element={<ProtectedRoute><CarBrowsing /></ProtectedRoute>} />
         <Route path="/confirmation/:reservationId" element={<Confirmation />} />
-        <Route path="/bookcar" element={<CarReservation />} />
+        <Route path="/bookcar" element={<ProtectedRoute><CarReservation /></ProtectedRoute>} />
       </Routes>
     </Router>
   );

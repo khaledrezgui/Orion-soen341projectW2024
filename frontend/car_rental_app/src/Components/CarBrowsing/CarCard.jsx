@@ -62,8 +62,26 @@ const CarCard = ({ car }) => {
     setModalOpen(false);
   };
 
+  const validateDatesWithinAvailability = (start, end) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    return availability.some(a => {
+      const availableStart = new Date(a.start);
+      const availableEnd = new Date(a.end);
+      return startDate >= availableStart && endDate <= availableEnd;
+    });
+  };
+
   const bookReservation = async (startDate, endDate) => {
     closeModal();
+
+    // Validate dates within availability here
+    if (!validateDatesWithinAvailability(startDate, endDate)) {
+      setErrorMessage('Selected dates are outside the available period.');
+      return; // This return statement ensures that the rest of the function does not execute if the dates are invalid
+    }
+
     const token = localStorage.getItem('token');
     if (!token) {
       console.error('No token found');
@@ -74,11 +92,14 @@ const CarCard = ({ car }) => {
     const userId = decodedToken.id;
 
     try {
+      const formattedStartDate = new Date(startDate).toISOString();
+      const formattedEndDate = new Date(endDate).toISOString();
+
       const response = await axios.post('/reservations', {
         user: userId,
         car: _id,
-        startDate,
-        endDate
+        startDate: formattedStartDate,
+        endDate: formattedEndDate
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -94,10 +115,10 @@ const CarCard = ({ car }) => {
     }
   };
 
+
   return (
     <>
       <div className="car" key={_id}>
-        {/* Car card content */}
         <div>
           <p>{year}</p>
         </div>
