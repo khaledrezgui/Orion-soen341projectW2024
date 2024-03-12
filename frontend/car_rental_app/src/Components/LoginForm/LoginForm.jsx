@@ -21,8 +21,11 @@ const LoginForm = () => {
         password: password,
       });
 
-      if (response.data) {
-        console.log(response.data); 
+      const { token } = response.data;
+
+      if (token) {
+        console.log("Token:", token);
+        localStorage.setItem('token', token); // Store the token
         localStorage.setItem('isLoggedIn', 'true');
         navigate('/browse'); // Redirect to the browse page on successful login
       }
