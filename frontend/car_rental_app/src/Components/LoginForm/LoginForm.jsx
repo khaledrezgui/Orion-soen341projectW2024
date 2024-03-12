@@ -23,6 +23,7 @@ const LoginForm = () => {
 
       if (response.data) {
         console.log(response.data); 
+        localStorage.setItem('isLoggedIn', 'true');
         navigate('/browse'); // Redirect to the browse page on successful login
       }
     } catch (err) {

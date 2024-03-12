@@ -43,7 +43,7 @@ const RegisterForm = () => {
         <div className="input-box">
           <input
             type="email"
-            placeholder="Email"
+            placeholder="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
