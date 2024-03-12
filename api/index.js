@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const authRoute = require("./routes/auth.js");
 const usersRoute = require("./routes/users.js");
 const carsRoute = require("./routes/cars.js");
+const reservationsRoute = require("./routes/reservations.js");
 
 const app = express();
 dotenv.config();
@@ -28,7 +29,7 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/cars", carsRoute);
-app.use("/api/reservations", authRoute);
+app.use("/api/reservations", reservationsRoute);
 
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;

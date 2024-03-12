@@ -38,11 +38,12 @@ const CarSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    // availability:{
-    //     type:Boolean,
-    //     default:true
-    // }
+    
+    availability: [{
+        start: Date,
+        end: Date
+    }]
 
 });
 
-module.exports = mongoose.model("Cars", CarSchema);
+module.exports = mongoose.model("Car", CarSchema);
