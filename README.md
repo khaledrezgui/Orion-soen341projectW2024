@@ -23,9 +23,25 @@ cd car_rental_app
 ```
 Then, you can run the front end application by doing:
 ```
+npm install
+
 npm run start
 ```
-You will then be able to run the application on a local host. 
+You will then be able to run front end application on a local host. 
+
+To run the back end application, go back into the originial repos (Orion-soen341projectW2024), then open the api repos :
+```
+cd ..
+cd ..
+cd api
+```
+
+Now make sure you have npm installed, and again start the server:
+```
+npm install
+
+npm run start
+```
 
 # Technologies used
 MongoDB, Express.js, React.js, Node.js
