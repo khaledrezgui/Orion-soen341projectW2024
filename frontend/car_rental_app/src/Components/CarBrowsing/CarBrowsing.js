@@ -1,16 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CarCard from "./CarCard"; 
 import SearchIcon from '../../pictures/search.svg';
 import "./CarBrowsing.css";
-import sampleData from '../../sampleData.json'; 
+import axios from 'axios'; 
 
 const CarBrowsing = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [cars, setCars] = useState(sampleData.cars); 
+  const [cars, setCars] = useState([]);
+  const [allCars, setAllCars] = useState([]); // Store all fetched cars
+
+  useEffect(() => {
+    // Fetch cars from the backend when the component mounts
+    const fetchCars = async () => {
+      try {
+        const response = await axios.get('/cars'); // Adjust the URL as needed
+        setCars(response.data);
+        setAllCars(response.data); // Keep a copy of all cars for filtering
+      } catch (error) {
+        console.error("Failed to fetch cars:", error);
+      }
+    };
+
+    fetchCars();
+  }, []);
 
   // Function to filter cars based on the search term
   const searchCars = (term) => {
-    const filteredCars = sampleData.cars.filter((car) =>
+    if (!term) {
+      setCars(allCars); // If the search term is empty, reset to show all cars
+      return;
+    }
+    const filteredCars = allCars.filter((car) =>
       `${car.make} ${car.model}`.toLowerCase().includes(term.toLowerCase())
     );
     setCars(filteredCars);

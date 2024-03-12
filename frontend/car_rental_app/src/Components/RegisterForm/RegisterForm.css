@@ -8,7 +8,8 @@
   }
   
   /* Style for input fields */
-  .wrapper .input-box input[type="text"], 
+  .wrapper .input-box input[type="text"],
+  .wrapper .input-box input[type="email"],  
   .wrapper .input-box input[type="password"] {
     width: calc(100% - 40px); 
     padding: 12px 20px;
