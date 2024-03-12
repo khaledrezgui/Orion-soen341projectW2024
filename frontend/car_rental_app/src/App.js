@@ -6,7 +6,7 @@ import RegisterForm from './Components/RegisterForm/RegisterForm';
 import CarBrowsing from './Components/CarBrowsing/CarBrowsing';
 import CarReservation from './Components/CarReservation/CarReservation';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
-import Confirmation from './Components/Confirmation/BookConfirmation';
+import Confirmation from './Components/Confirmation/Confirmation';
 import NavBar from './Components/NavBar/NavBar';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/browse" element={<ProtectedRoute><CarBrowsing /></ProtectedRoute>} />
-        <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/confirmation/:reservationId" element={<Confirmation />} />
         <Route path="/bookcar" element={<CarReservation />} />
       </Routes>
     </Router>

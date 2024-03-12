@@ -40,8 +40,8 @@ const login = async (req,res,next)=>{
             { expiresIn: "1h" } // Token expires in 1 hour
         );
 
-    const {password, isAdmin,...otherDetails} = user._doc;
-     res.status(200).json({...otherDetails});
+        const {password, isAdmin, ...otherDetails} = user._doc;
+        res.status(200).json({ token, user: {...otherDetails} });
     }catch(err){
      next(err);
     }
