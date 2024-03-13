@@ -79,7 +79,7 @@ const CarCard = ({ car }) => {
     // Validate dates within availability here
     if (!validateDatesWithinAvailability(startDate, endDate)) {
       setErrorMessage('Selected dates are outside the available period.');
-      return; // This return statement ensures that the rest of the function does not execute if the dates are invalid
+      return; 
     }
 
     const token = localStorage.getItem('token');

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import './RegisterForm.css';
 import { FaUser } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
