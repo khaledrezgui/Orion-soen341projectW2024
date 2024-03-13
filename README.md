@@ -21,11 +21,13 @@ After cloning the repos, open terminal and enter the "car_rental_app" which is i
 cd frontend
 cd car_rental_app
 ```
-Then, you can run the front end application by doing:
+Install the necessary npm package:
 ```
 npm install
+```
 
 Also, install the jwt decode library (or else you can run into some bugs)
+
 ```
 npm install jwt-decode
 ```
