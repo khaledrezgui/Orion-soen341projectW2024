@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import logo from './Logo.png';
-import './NavBar.css'; 
+import './NavBar.css';
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -17,15 +17,19 @@ const NavBar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/browse" className="navbar-logo">
-          <img src={logo} alt="App Logo" /> 
+          <img src={logo} alt="App Logo" style={{ maxWidth: '100px' }} />
         </Link>
         <ul className="nav-menu">
-          {isLoggedIn && (
-            <li className="nav-item" onClick={handleLogout} style={{cursor: 'pointer'}}>
-              <span className="nav-links">Logout</span>
-            </li>
-          )}
-          {!isLoggedIn && (
+          {isLoggedIn ? (
+            <>
+              <li className="nav-item">
+                <Link to="/reservationlist" className="nav-links">Your Reservations</Link>
+              </li>
+              <li className="nav-item" onClick={handleLogout} style={{ cursor: 'pointer' }}>
+                <span className="nav-links">Logout</span>
+              </li>
+            </>
+          ) : (
             <>
               <li className="nav-item">
                 <Link to="/login" className="nav-links">Login</Link>
