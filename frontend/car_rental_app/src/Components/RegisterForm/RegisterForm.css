@@ -1,7 +1,7 @@
 /* Reset some styles for the form and its elements */
 .wrapper form {
     border: 3px solid #f1f1f1;
-    max-width: 420px; /* adjust as needed */
+    max-width: 420px; 
     margin: auto;
     padding: 20px;
     background: #fff;

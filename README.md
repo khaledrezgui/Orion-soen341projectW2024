@@ -31,7 +31,7 @@ Also, install the jwt decode library (or else you can run into some bugs)
 ```
 npm install jwt-decode
 ```
-You can run the react app, open the localhost shown in termin (http://localhost:3000/)
+You can run the react app, open the localhost shown in terminal (http://localhost:3000/)
 ```
 npm run start
 ```
