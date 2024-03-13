@@ -25,6 +25,12 @@ Then, you can run the front end application by doing:
 ```
 npm install
 
+Also, install the jwt decode library (or else you can run into some bugs)
+```
+npm install jwt-decode
+```
+You can run the react app, open the localhost shown in termin (http://localhost:3000/)
+```
 npm run start
 ```
 You will then be able to run front end application on a local host. 
@@ -39,7 +45,9 @@ cd api
 Now make sure you have npm installed, and again start the server:
 ```
 npm install
-
+```
+Now, run the backend server.
+```
 npm run start
 ```
 
