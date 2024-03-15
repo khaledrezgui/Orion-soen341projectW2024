@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginForm.css';
+import { jwtDecode } from "jwt-decode";
 import { FaUser } from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
 
@@ -10,7 +11,6 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,18 +21,21 @@ const LoginForm = () => {
         password: password,
       });
 
-      const { token } = response.data;
+      const { token } = response.data; // Get token from response
 
       if (token) {
         console.log("Token:", token);
         localStorage.setItem('token', token); // Store the token
+
+        const decoded = jwtDecode(token);
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('isAdmin', decoded.isAdmin ? 'true' : 'false'); 
+
         navigate('/browse'); // Redirect to the browse page on successful login
       }
     } catch (err) {
-        
-       setErrorMessage("Login failed. Try again or register") 
-      console.error('Login failed:', err);     
+      setErrorMessage("Login failed. Try again or register");
+      console.error('Login failed:', err);
     }
   };
 

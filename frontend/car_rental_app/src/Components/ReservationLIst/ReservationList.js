@@ -3,6 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 import ReservationCard from './ReservationCard';
 import SimpleModal from '../SimpleModal';
+import './ReservationList.css';
 
 const ReservationList = () => {
     const [reservations, setReservations] = useState([]);

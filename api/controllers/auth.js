@@ -41,7 +41,7 @@ const login = async (req,res,next)=>{
         );
 
         const {password, isAdmin, ...otherDetails} = user._doc;
-        res.status(200).json({ token, user: {...otherDetails} });
+        res.status(200).json({ token, user: {...otherDetails, isAdmin} });
     }catch(err){
      next(err);
     }
