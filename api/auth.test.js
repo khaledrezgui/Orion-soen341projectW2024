@@ -1,4 +1,3 @@
-// Assuming a simplified version of the login function for demonstration purposes
 const jwt = require('jsonwebtoken');
 
 jest.mock('jsonwebtoken');
