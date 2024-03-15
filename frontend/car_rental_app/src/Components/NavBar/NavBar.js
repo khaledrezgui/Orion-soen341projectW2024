@@ -28,9 +28,14 @@ const NavBar = () => {
                 <Link to="/reservationlist" className="nav-links">Your Reservations</Link>
               </li>
               {isAdmin && (
-                <li className="nav-item">
-                  <Link to="/carmanagement" className="nav-links">Car List</Link>
-                </li>
+                <>
+                  <li className="nav-item">
+                    <Link to="/carmanagement" className="nav-links">Car List</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/usermanagement" className="nav-links">Users List</Link>
+                  </li>
+                </>
               )}
               <li className="nav-item" onClick={handleLogout} style={{ cursor: 'pointer' }}>
                 <span className="nav-links">Logout</span>

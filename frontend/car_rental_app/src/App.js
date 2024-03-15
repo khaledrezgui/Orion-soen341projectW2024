@@ -9,6 +9,7 @@ import ProtectedAdminRoute from './Components/ProtectedRoute/ProtectedAdminRoute
 import Confirmation from './Components/Confirmation/Confirmation';
 import ReservationList from './Components/ReservationLIst/ReservationList';
 import CarManagement from './Components/CarManagement/CarManagement';
+import UserManagement from './Components/UserManagement/UserManagement';
 import NavBar from './Components/NavBar/NavBar';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/confirmation/:reservationId" element={<ProtectedRoute><Confirmation /> </ProtectedRoute>} />
         <Route path="/reservationlist" element={<ProtectedRoute><ReservationList /></ProtectedRoute>} />
         <Route path="/carmanagement" element={<ProtectedAdminRoute><CarManagement /></ProtectedAdminRoute>} />
+        <Route path="/usermanagement" element={<ProtectedAdminRoute><UserManagement /></ProtectedAdminRoute>} />
       </Routes>
     </Router>
   );
