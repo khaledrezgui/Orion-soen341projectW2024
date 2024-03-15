@@ -1,11 +1,10 @@
-// Assuming a simplified version of the login function for demonstration purposes
 const jwt = require('jsonwebtoken');
 
 jest.mock('jsonwebtoken');
 
 describe('Auth Controller - Login without User Model', () => {
   it('should return JWT token on successful login simulation', async () => {
-    // Assuming jwt.sign is used in your login function
+
     jwt.sign = jest.fn().mockReturnValue('fakeToken');
 
     // Simulated function outcome
@@ -15,8 +14,6 @@ describe('Auth Controller - Login without User Model', () => {
     };
 
     // Simulate a successful login process
-    // Directly test the outcome as if the login was successful
-    // Note: This is highly simplified and assumes the login process was successful
     const mockResponseData = {
       message: 'Login successful',
       token: 'fakeToken'
