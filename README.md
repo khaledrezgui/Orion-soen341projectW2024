@@ -16,6 +16,9 @@ This car rental application makes it easy for customers to rent vehicles by allo
 # App Walkthrough Demo
 https://www.youtube.com/watch?v=-CFms3P5E5o
 
+If you want to run the app as an admin (to see the car and users list), use the following account:
+Username : AdminAccount
+password : admin123
 # How to run the app
 First of all, make sure you have [Node](https://nodejs.org/en) installed into your system. 
 
