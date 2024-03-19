@@ -11,6 +11,7 @@ const EditCarModal = ({ isOpen, onClose, car, onConfirm }) => {
     seats: car?.seats.toString() || '',
     availabilityStart: car?.availability && car.availability.length ? new Date(car.availability[0].start).toISOString().split('T')[0] : '',
     availabilityEnd: car?.availability && car.availability.length ? new Date(car.availability[0].end).toISOString().split('T')[0] : '',
+    photoURL: car?.photos && car.photos.length ? car.photos[0] : '',
   });
 
   if (!isOpen) return null;
@@ -29,7 +30,8 @@ const EditCarModal = ({ isOpen, onClose, car, onConfirm }) => {
       availability: [{
         start: new Date(formState.availabilityStart),
         end: new Date(formState.availabilityEnd),
-      }]
+      }],
+      photos: [formState.photoURL],
     };
     onConfirm(updatedCar);
     onClose();
@@ -57,6 +59,8 @@ const EditCarModal = ({ isOpen, onClose, car, onConfirm }) => {
         <input name="availabilityStart" type="date" value={formState.availabilityStart} onChange={handleChange} />
         <label>Availability End:</label>
         <input name="availabilityEnd" type="date" value={formState.availabilityEnd} onChange={handleChange} />
+        <label>Photo URL:</label>
+        <input name="photoURL" value={formState.photoURL} onChange={handleChange} />
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
           <button type="button" onClick={onClose} style={{ backgroundColor: 'red', color: 'white' }}>Cancel</button>
           <button type="submit" style={{ backgroundColor: '#04AA6D', color: 'white' }}>Save Changes</button>
