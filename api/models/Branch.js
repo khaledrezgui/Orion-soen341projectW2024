@@ -15,6 +15,16 @@ const BranchSchema = new mongoose.Schema({
         type: String,
         required: true, 
         trim: true
+    },
+    location: { 
+        lat: { // Latitude
+            type: Number,
+            required: true
+        },
+        lng: { // Longitude
+            type: Number,
+            required: true
+        }
     }
 });
 
