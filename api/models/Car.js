@@ -5,6 +5,10 @@ const CarSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    branchId: {
+        type : String,
+        required: true
+    },
     model: {
         type: String,
         required: true
