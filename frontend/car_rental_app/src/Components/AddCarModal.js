@@ -13,7 +13,6 @@ const AddCarModal = ({ isOpen, onClose, onConfirm }) => {
     availabilityStart: '',
     availabilityEnd: '',
     photos: [],
-    isAvailable: true,
   });
 
   if (!isOpen) return null;

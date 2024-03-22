@@ -39,11 +39,7 @@ const CarSchema = new mongoose.Schema({
     availability: [{
         start: Date,
         end: Date
-    }],
-    isAvailable: {
-        type: Boolean,
-        required: true
-    }
+    }]
 });
 
 module.exports = mongoose.model("Car", CarSchema);
