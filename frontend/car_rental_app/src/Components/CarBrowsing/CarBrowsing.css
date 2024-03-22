@@ -14,14 +14,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: #fff; /* Ensure text color is styled for visibility */
-  min-height: 100vh; /* Ensure the component covers the viewport height */
+  color: #fff;
+  min-height: 100vh;
 }
 
 .carbrowsing h1 {
   font-size: 3rem;
   letter-spacing: 0.9px;
-  color: transparent; /* Keep the text fill transparent for the clipping effect */
+  color: transparent;
   background: #fff;
   background-clip: text;
   -webkit-background-clip: text;
@@ -29,18 +29,19 @@
   margin-bottom: 2rem;
 }
 
-.carbrowsing .search {
+.carbrowsing .search-container {
   width: 100%;
-  max-width: 600px; /* Adjust based on your design preference */
+  max-width: 800px;
   margin: 20px auto;
   display: flex;
   align-items: center;
-  position: relative;
+  gap: 10px;
   background: #1f2123;
   padding: 12px 20px;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .carbrowsing .car button {
   position: absolute;
   bottom: 10px; 
@@ -55,13 +56,19 @@
   transition: background-color 0.3s;
 }
 
+.carbrowsing .search-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
 .carbrowsing .car button:hover {
   background-color: #037d56; 
 }
 
-
-.carbrowsing .search input {
-  width: 100%;
+.carbrowsing .search-input input {
+  flex-grow: 1;
   border: none;
   background: transparent;
   padding: 8px 15px;
@@ -70,11 +77,32 @@
   font-family: var(--font-raleway);
 }
 
-.carbrowsing .search img {
-  position: absolute;
-  right: 20px;
+.carbrowsing .search-input img {
+  margin-left: 10px;
   cursor: pointer;
 }
+
+.carbrowsing .search-container select {
+  flex-grow: 1;
+  padding: 8px 15px;
+  background-color: #2a2d30; /* Dark background to match the theme */
+  color: #a1a1a1; /* Lighter text for contrast */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  margin-left: 10px; /* Space it out from the input */
+  cursor: pointer; /* Cursor changes to pointer to indicate it's selectable */
+  font-family: var(--font-raleway); /* Consistent font */
+}
+
+.carbrowsing .search-container select:focus {
+  outline: none; /* Remove focus outline for cleaner look */
+}
+
+.carbrowsing .search-container select option {
+  background-color: #343739; /* Dark background for options */
+  color: white; /* Ensure text is easily readable */
+}
+
 
 .carbrowsing .empty {
   display: flex;
@@ -93,10 +121,10 @@
 }
 
 .carbrowsing .car {
-  position: relative; 
-  width: 300px; 
+  position: relative;
+  width: 300px;
   padding-bottom: 45px;
-  max-width: 400px; 
+  max-width: 400px;
   background: #343739;
   border-radius: 10px;
   overflow: hidden;
@@ -104,7 +132,7 @@
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 }
 
 .carbrowsing .car:hover {
@@ -112,21 +140,19 @@
 }
 
 .carbrowsing .car img {
-  width: 400px; 
-  height: 400px; 
-  object-fit: cover; 
+  width: 100%;
+  height: auto;
+  object-fit: cover;
   display: block;
-  margin: auto; 
+  margin: auto;
 }
-
 
 .carbrowsing .car div {
   padding: 15px;
   color: #ffffff;
 }
 
-.carbrowsing .car h3, 
-.carbrowsing .car p {
+.carbrowsing .car h3, .carbrowsing .car p {
   margin: 5px 0;
 }
 
