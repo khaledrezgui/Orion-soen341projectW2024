@@ -45,7 +45,7 @@ const SimpleModal = ({ isOpen, onClose, onConfirm, minDate, maxDate }) => {
 const CarCard = ({ car }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
-  const { _id, make, model, year, type, price, description, photos, seats, availability } = car;
+  const { _id, make, model, year, type, price, description, photos, seats } = car;
   const [errorMessage, setErrorMessage] = useState('');
 
   const openModal = () => setModalOpen(true);
@@ -98,7 +98,6 @@ const CarCard = ({ car }) => {
             <p>Seats: {seats}</p>
             <p>Rental Price: ${parseFloat(price).toFixed(2)}/hr</p>
             <p>Description: {description}</p>
-            <p>Available: {availability.map(a => `${formatDate(a.start)} to ${formatDate(a.end)}`).join(', ')}</p>
             <button onClick={openModal}>Book Reservation</button>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           </div>
@@ -107,8 +106,6 @@ const CarCard = ({ car }) => {
           isOpen={isModalOpen}
           onClose={closeModal}
           onConfirm={bookReservation}
-          minDate={availability.length ? availability[0].start : ''}
-          maxDate={availability.length ? availability[availability.length - 1].end : ''}
          />
         </>
         );

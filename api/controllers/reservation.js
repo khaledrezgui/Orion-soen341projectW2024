@@ -23,14 +23,9 @@ const createReservation = async (req, res) => {
         return res.status(404).send({ message: 'Car not found.' });
     }
 
-    const availableStart = new Date(carDetails.availability.start);
-    const availableEnd = new Date(carDetails.availability.end);
     const start = new Date(startDate);
     const end = new Date(endDate);
 
-    if (start < availableStart || end > availableEnd || start > end) {
-        return res.status(400).send({ message: 'Selected dates do not fit the car\'s availability.' });
-    }
     
     try {
         const { user, car, startDate, endDate } = req.body;

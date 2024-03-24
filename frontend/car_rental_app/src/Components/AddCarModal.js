@@ -10,8 +10,6 @@ const AddCarModal = ({ isOpen, onClose, onConfirm }) => {
     description: '',
     price: '',
     seats: '',
-    availabilityStart: '',
-    availabilityEnd: '',
     photos: [],
   });
 
@@ -32,10 +30,6 @@ const AddCarModal = ({ isOpen, onClose, onConfirm }) => {
       ...formState,
       price: parseFloat(formState.price),
       seats: parseInt(formState.seats, 10),
-      availability: formState.availabilityStart && formState.availabilityEnd ? [{
-        start: new Date(formState.availabilityStart),
-        end: new Date(formState.availabilityEnd),
-      }] : [],
       photos: formState.photos.filter(photo => photo !== ''), // Filter out empty strings if any
     };
     onConfirm(newCar);
@@ -67,12 +61,6 @@ const AddCarModal = ({ isOpen, onClose, onConfirm }) => {
           
           <label>Seats:</label>
           <input name="seats" type="number" value={formState.seats} onChange={handleChange} />
-          
-          <label>Availability Start:</label>
-          <input name="availabilityStart" type="date" value={formState.availabilityStart} onChange={handleChange} />
-          
-          <label>Availability End:</label>
-          <input name="availabilityEnd" type="date" value={formState.availabilityEnd} onChange={handleChange} />
 
           <label>Photo URLs:</label>
           <input name="photos" value={formState.photos[0] || ''} onChange={handleChange} placeholder="Enter image URL" />
