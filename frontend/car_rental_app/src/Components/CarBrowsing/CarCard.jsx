@@ -82,7 +82,7 @@ const CarCard = ({ car }) => {
       }
     } catch (error) {
       console.error('Reservation error:', error.response?.data || error);
-      setErrorMessage('Error during reservation');
+      setErrorMessage('Car already reserved for that time slot.');
     }
   };
 
