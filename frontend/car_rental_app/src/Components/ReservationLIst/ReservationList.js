@@ -104,8 +104,6 @@ const ReservationList = () => {
                 isOpen={isModalOpen}
                 onClose={() => setModalOpen(false)}
                 onConfirm={onModalConfirm}
-                minDate={currentReservation && cars[currentReservation.car] ? cars[currentReservation.car].availability.start : ''}
-                maxDate={currentReservation && cars[currentReservation.car] ? cars[currentReservation.car].availability.end : ''}
             />
         </div>
     );

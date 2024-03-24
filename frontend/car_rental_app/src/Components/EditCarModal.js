@@ -9,8 +9,6 @@ const EditCarModal = ({ isOpen, onClose, car, onConfirm }) => {
     description: car?.description || '',
     price: car?.price.toString() || '',
     seats: car?.seats.toString() || '',
-    availabilityStart: car?.availability && car.availability.length ? new Date(car.availability[0].start).toISOString().split('T')[0] : '',
-    availabilityEnd: car?.availability && car.availability.length ? new Date(car.availability[0].end).toISOString().split('T')[0] : '',
     photoURL: car?.photos && car.photos.length ? car.photos[0] : '',
   });
 
@@ -27,10 +25,6 @@ const EditCarModal = ({ isOpen, onClose, car, onConfirm }) => {
       ...formState,
       price: parseFloat(formState.price),
       seats: parseInt(formState.seats, 10),
-      availability: [{
-        start: new Date(formState.availabilityStart),
-        end: new Date(formState.availabilityEnd),
-      }],
       photos: [formState.photoURL],
     };
     onConfirm(updatedCar);
@@ -54,11 +48,6 @@ const EditCarModal = ({ isOpen, onClose, car, onConfirm }) => {
         <label>Price:</label>
         <input name="price" type="number" value={formState.price} onChange={handleChange} />
         <label>Seats:</label>
-        <input name="seats" type="number" value={formState.seats} onChange={handleChange} />
-        <label>Availability Start:</label>
-        <input name="availabilityStart" type="date" value={formState.availabilityStart} onChange={handleChange} />
-        <label>Availability End:</label>
-        <input name="availabilityEnd" type="date" value={formState.availabilityEnd} onChange={handleChange} />
         <label>Photo URL:</label>
         <input name="photoURL" value={formState.photoURL} onChange={handleChange} />
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
