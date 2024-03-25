@@ -12,41 +12,24 @@ async function checkOverlappingReservations(carId, startDate, endDate) {
     });
 }
 
-async function updateCarAvailability(carId, isAvailable) {
-    const car = await Car.findById(carId);
-    if (car) {
-        car.isAvailable = isAvailable;
-        await car.save();
-    }
-}
-
 // CREATE
 const createReservation = async (req, res) => {
-
-    const { user, car, startDate, endDate } = req.body;
+    const { user, car, startDate, endDate, gps, safetySeat, fuelService, insurance } = req.body;
 
     const carDetails = await Car.findById(car);
     if (!carDetails) {
         return res.status(404).send({ message: 'Car not found.' });
     }
 
-    const availableStart = new Date(carDetails.availability.start);
-    const availableEnd = new Date(carDetails.availability.end);
     const start = new Date(startDate);
     const end = new Date(endDate);
 
-    if (start < availableStart || end > availableEnd || start > end) {
-        return res.status(400).send({ message: 'Selected dates do not fit the car\'s availability.' });
-    }
-    
     try {
-        const { user, car, startDate, endDate } = req.body;
         if (await checkOverlappingReservations(car, startDate, endDate)) {
             return res.status(400).send('Car is already reserved for the requested period.');
         }
-        const reservation = new Reservation({ user, car, startDate, endDate });
+        const reservation = new Reservation({ user, car, startDate, endDate, gps, safetySeat, fuelService, insurance });
         await reservation.save();
-        await updateCarAvailability(car, false);
         res.status(201).send(reservation);
     } catch (error) {
         res.status(400).send(error);
@@ -60,7 +43,6 @@ const updateReservation = async (req, res) => {
         if (!reservation) {
             return res.status(404).send();
         }
-        await updateCarAvailability(reservation.car, true);
         res.send(reservation);
     } catch (error) {
         res.status(400).send(error);
@@ -74,7 +56,6 @@ const deleteReservation = async (req, res) => {
         if (!reservation) {
             return res.status(404).send();
         }
-        await updateCarAvailability(reservation.car, true);
         res.send(reservation);
     } catch (error) {
         res.status(500).send(error);
