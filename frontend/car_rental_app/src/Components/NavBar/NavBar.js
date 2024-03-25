@@ -29,6 +29,9 @@ const NavBar = () => {
               </li>
               {isAdmin && (
                 <>
+                <li className="nav-item">
+                  <Link to="/adminreservationlist" className="nav-links">User Reservations</Link>
+                  </li>
                   <li className="nav-item">
                     <Link to="/carmanagement" className="nav-links">Car List</Link>
                   </li>

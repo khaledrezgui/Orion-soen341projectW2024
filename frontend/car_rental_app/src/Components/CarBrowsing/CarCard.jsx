@@ -4,6 +4,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
 const SimpleModal = ({ isOpen, onClose, onConfirm, minDate, maxDate, car }) => {
+
   // Initialize date and time states
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');

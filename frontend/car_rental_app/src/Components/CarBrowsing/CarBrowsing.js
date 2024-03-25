@@ -10,33 +10,40 @@ const CarBrowsing = () => {
   const [allCars, setAllCars] = useState([]);
   const [branches, setBranches] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState('');
-  const [postalOrAirportCode, setPostalOrAirportCode] = useState("");
+  const [selectedCode, setSelectedCode] = useState("");
+
+const [filterType, setFilterType] = useState('');
+const [filterSize, setFilterSize] = useState(0); // 0 indicates no filter applied
+const [filterYear, setFilterYear] = useState(0); // Similarly, 0 for no filter
+
+
+  // Assuming codes are fetched or defined here
+  const [codes, setCodes] = useState({
+    postalCodes: [
+      { code: 'H3Z 2Y7', nearestBranchId: '65fb9e287900386958743b6b' },
+      { code: 'H3Z 2Y7', nearestBranchId: '65fb9e287900386958743b6b' },
+      { code: 'H4B 1R6', nearestBranchId: '65fb9f527900386958743b6d' }
+    ],
+    airportCodes: [
+      { code: 'YUL', nearestBranchId: '65fba08a7900386958743b6f' },
+      { code: 'YMX', nearestBranchId: '65fb9e287900386958743b6b' }
+    ]
+  });
   const [selectedBranchObject, setSelectedBranchObject] = useState(null);
 
   useEffect(() => {
-    // Fetch branches
-    const fetchBranches = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('/branches');
-        setBranches(response.data);
+        const branchesResponse = await axios.get('/branches');
+        setBranches(branchesResponse.data);
+        const carsResponse = await axios.get('/cars');
+        setCars(carsResponse.data);
+        setAllCars(carsResponse.data);
       } catch (error) {
-        console.error("Failed to fetch branches:", error);
+        console.error("Failed to fetch data:", error);
       }
     };
-    
-    // Fetch cars
-    const fetchCars = async () => {
-      try {
-        const response = await axios.get('/cars');
-        setCars(response.data);
-        setAllCars(response.data);
-      } catch (error) {
-        console.error("Failed to fetch cars:", error);
-      }
-    };
-
-    fetchBranches();
-    fetchCars();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -44,63 +51,51 @@ const CarBrowsing = () => {
     setSelectedBranchObject(branch);
   }, [selectedBranch, branches]);
 
-  // Filter cars based on the search term and selected branch
-  const filterCars = () => {
-    let filteredCars = allCars.filter((car) =>
-      `${car.make} ${car.model}`.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  const handleCodeChange = (selectedCode) => {
+    const foundCode = [...codes.postalCodes, ...codes.airportCodes].find(code => code.code === selectedCode);
+    if (foundCode) {
+      setSelectedBranch(foundCode.nearestBranchId);
+      setSelectedCode(selectedCode);
+      // Filter cars based on the selected branch
+      const filteredCars = allCars.filter(car => car.branchId === foundCode.nearestBranchId);
+      setCars(filteredCars);
+    }
+  };
+
+  useEffect(() => {
+    let filteredCars = allCars;
+
+    if (searchTerm) {
+      filteredCars = filteredCars.filter(car => `${car.make} ${car.model}`.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    if (filterType) {
+      filteredCars = filteredCars.filter(car => car.type === filterType);
+    }
+    if (filterSize) {
+      filteredCars = filteredCars.filter(car => car.seats === filterSize);
+    }
+    if (filterYear) {
+      filteredCars = filteredCars.filter(car => car.year === filterYear);
+    }
     if (selectedBranch) {
       filteredCars = filteredCars.filter(car => car.branchId === selectedBranch);
     }
+
     setCars(filteredCars);
+  }, [searchTerm, filterType, filterSize, filterYear, selectedBranch, allCars]);
+
+  const clearFilters = () => {
+    setSearchTerm("");
+    setFilterType('');
+    setFilterSize(0);
+    setFilterYear(0);
+    setSelectedBranch('');
+    setSelectedCode('');
   };
-
-  // Example implementation using pseudo-code. You'll need to replace this with real API calls.
-async function geocodePostalOrAirportCode(code) {
-  // This is a placeholder function. You need to replace it with actual geocoding logic.
-  // For example, you could use a geocoding API to convert the code to lat/lng.
-  console.log(`Geocoding for code: ${code}`);
-  // Return mock coordinates (latitude and longitude)
-  return { lat: 45.5017, lng: -73.5673 }; // Example coordinates for Montreal
-}
-
-async function findNearestBranch(lat, lng) {
-  // This is a placeholder function. You should implement logic to find the nearest branch.
-  // Perhaps make a call to your backend API that calculates the nearest branch based on lat/lng.
-  console.log(`Finding nearest branch for coordinates: ${lat}, ${lng}`);
-  // Return mock branch ID (this would be dynamic based on actual nearest branch logic)
-  
-  return "65fb9e287900386958743b6b"; // Example branch ID
-}
-
-
-const handleFindBranch = async () => {
-  try {
-    const { lat, lng } = await geocodePostalOrAirportCode(postalOrAirportCode);
-    const nearestBranchId = await findNearestBranch(lat, lng);
-
-    // Assuming the `branches` state holds all the branches data
-    const nearestBranch = branches.find(branch => branch._id === nearestBranchId);
-    if (nearestBranch) {
-      setSelectedBranch(nearestBranch._id);
-      // This will trigger the useEffect hook to update `selectedBranchObject`
-    } else {
-      console.error("Nearest branch not found");
-    }
-  } catch (error) {
-    console.error("Error finding nearest branch:", error);
-  }
-};
-
-
-  useEffect(() => {
-    filterCars();
-  }, [searchTerm, selectedBranch]); // Add selectedBranch to dependency array
 
   return (
     <div className="carbrowsing">
       <h1>Car Rental App</h1>
-  
       <div className="search-container">
         <div className="search-input">
           <input
@@ -108,42 +103,62 @@ const handleFindBranch = async () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for cars"
           />
-          <img
-            src={SearchIcon}
-            alt="search"
-            onClick={filterCars}
-          />
+          <img src={SearchIcon} alt="search" onClick={() => handleCodeChange(searchTerm)} />
         </div>
-        <input
-          value={postalOrAirportCode}
-          onChange={(e) => setPostalOrAirportCode(e.target.value)}
-          placeholder="Postal Code or Airport Code"
-        />
-        <button onClick={handleFindBranch}>Find Nearest Branch</button>
-        <select value={selectedBranch} onChange={(e) => setSelectedBranch(e.target.value)}>
-          <option value="">Select a branch</option>
-          {branches.map((branch) => (
-            <option key={branch._id} value={branch._id}>{branch.name}</option>
-          ))}
-        </select>
+            <select className="dropdown-select" onChange={(e) => handleCodeChange(e.target.value)}>
+              <option value="">Select Postal Code or Airport</option>
+              {codes.postalCodes.map((code) => (
+                <option key={code.code} value={code.code}>{`Postal Code: ${code.code}`}</option>
+              ))}
+              {codes.airportCodes.map((code) => (
+                <option key={code.code} value={code.code}>{`Airport Code: ${code.code}`}</option>
+              ))}
+            </select>
+          </div>
+          <div className="selected-branch">
+            <h2>Selected Branch: {selectedBranchObject ? selectedBranchObject.name : 'None selected'}</h2>
+          </div>
+              <div className="filters">
+          <select className="dropdown-select" value={filterType} onChange={e => setFilterType(e.target.value)}>
+            <option value="">All Types</option>
+            <option value="Convertible">Convertible</option>
+            <option value="Coupe">Coupe</option>
+            <option value="Sedan">Sedan</option>
+            {/* Add more types as needed */}
+          </select>
+
+      <select className="dropdown-select" value={filterSize} onChange={e => setFilterSize(Number(e.target.value))}>
+        <option value="0">Any Size</option>
+        <option value="2">2 Seats</option>
+        <option value="4">4 Seats</option>
+        <option value="5">5 Seats</option>
+        <option value="7">7 Seats</option>
+        {/* Add more sizes as needed */}
+      </select>
+
+      <input 
+        className="dropdown-select" // Assuming you have CSS that makes inputs and selects look similar
+        type="number" 
+        value={filterYear === 0 ? '' : filterYear}
+        onChange={e => setFilterYear(Number(e.target.value))}
+        placeholder="Year"
+      />
+    </div>
+
+    <button onClick={clearFilters} className="dropdown-select clear-filters-btn">Clear Selection</button>
+    
+      <div className="container">
+        {cars.length > 0 ? (
+          cars.map((car, index) => <CarCard key={index} car={car} />)
+        ) : (
+          <div className="empty">
+            <h2>No cars found for the selected branch</h2>
+          </div>
+        )}
       </div>
-      <div className="selected-branch">
-          <h2>Selected Branch: {selectedBranchObject ? selectedBranchObject.name : 'None'}</h2>
-      </div>
-  
-      {cars.length > 0 ? (
-        <div className="container">
-          {cars.map((car, index) => (
-            <CarCard key={index} car={car} />
-          ))}
-        </div>
-      ) : (
-        <div className="empty">
-          <h2>No cars found</h2>
-        </div>
-      )}
     </div>
   );
+  
 };
 
 export default CarBrowsing;
