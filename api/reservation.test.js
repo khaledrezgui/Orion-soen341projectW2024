@@ -11,7 +11,7 @@ jest.mock('./models/Reservation', () => ({
   
   describe('Reservation Controller - createReservation', () => {
     it('should successfully create a reservation if no overlapping exists', async () => {
-      const mockCar = { _id: 'car123', isAvailable: true };
+      const mockCar = { _id: 'car123'};
       const mockReservationData = {
         user: 'user123',
         car: 'car123',

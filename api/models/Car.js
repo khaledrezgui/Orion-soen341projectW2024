@@ -35,14 +35,6 @@ const CarSchema = new mongoose.Schema({
     seats: {
         type: Number,
         required: true
-    },
-    availability: [{
-        start: Date,
-        end: Date
-    }],
-    isAvailable: {
-        type: Boolean,
-        required: true
     }
 });
 
