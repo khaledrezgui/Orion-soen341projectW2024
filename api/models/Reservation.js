@@ -17,7 +17,24 @@ const ReservationSchema = new mongoose.Schema({
     endDate: {
         type: Date,
         required: true
+    },
+    gps: {
+        type: Boolean,
+        required: true
+    },
+    safetySeat: {
+        type: Boolean,
+        required: true
+    },
+    fuelService:{
+        type:Boolean,
+        required:true
+    },
+    insurance: {
+        type: Boolean,
+        required: true
     }
+    
 });
 
 module.exports = mongoose.model('Reservation', ReservationSchema);
