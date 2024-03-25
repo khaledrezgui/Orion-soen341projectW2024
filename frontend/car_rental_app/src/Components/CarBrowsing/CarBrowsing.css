@@ -56,6 +56,13 @@
   transition: background-color 0.3s;
 }
 
+.carbrowsing .search-container, .carbrowsing .filters {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  gap: 10px; /* Adjust gap as necessary */
+}
+
 .carbrowsing .search-input {
   position: relative;
   display: flex;
@@ -101,6 +108,20 @@
 .carbrowsing .search-container select option {
   background-color: #343739; /* Dark background for options */
   color: white; /* Ensure text is easily readable */
+}
+
+.carbrowsing .dropdown-select, .carbrowsing .filter-input {
+  margin-left: 10px;
+  padding: 8px 10px;
+  background-color: #2a2d30;
+  color: #a1a1a1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.carbrowsing .filter-input {
+  width: auto; /* Adjust as necessary */
 }
 
 

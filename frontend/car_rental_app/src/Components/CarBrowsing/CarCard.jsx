@@ -3,11 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
-// Utility function to format dates
-const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
-};
 
 const SimpleModal = ({ isOpen, onClose, onConfirm, minDate, maxDate }) => {
   // Initialize date and time states
