@@ -3,33 +3,60 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
+const SimpleModal = ({ isOpen, onClose, onConfirm, minDate, maxDate, car }) => {
 
-const SimpleModal = ({ isOpen, onClose, onConfirm, minDate, maxDate }) => {
   // Initialize date and time states
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [startTime, setStartTime] = useState('00:00');
   const [endTime, setEndTime] = useState('23:59');
 
+  // Addons
+  const [gps, setGps] = useState(false);
+  const [safetySeat, setSafetySeat] = useState(false);
+  const [fuelService, setFuelService] = useState(false);
+  const [insurance, setInsurance] = useState(false);
+
   // Handle confirm action
-  const handleConfirm = () => onConfirm(startDate, startTime, endDate, endTime);
+  const handleConfirm = () => onConfirm(startDate, startTime, endDate, endTime, gps, safetySeat, fuelService, insurance);
 
   if (!isOpen) return null;
 
   return (
-    <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'grey', padding: '20px', zIndex: 100 }}>
-      <h2 style={{ textAlign: 'center' }}>Select Reservation Dates and Times</h2>
+    <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'grey', padding: '20px', zIndex: 100,  border: '2px groove black', borderRadius: '10px', boxShadow: '2px 4px 4px rgba(0, 0, 0, 0.7)'}}>
+      <h2 style={{ textAlign: 'center', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>{`${car.make} ${car.model} (${car.year})`} - Reservation Details</h2>
+      
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px' }}>
         <div>
-          <label>Start Date: </label>
+          <label>Pickup Date: </label>
           <input type="date" value={startDate} min={minDate} max={maxDate} onChange={(e) => setStartDate(e.target.value)} />
           <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
         </div>
         <div>
-          <label>End Date: </label>
+          <label>Return Date: </label>
           <input type="date" value={endDate} min={minDate} max={maxDate} onChange={(e) => setEndDate(e.target.value)} />
           <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
         </div>
+        <div>
+        <h3 style={{ textAlign: 'center', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Additional services:</h3>
+        <label>
+            <input type="checkbox" checked={gps} onChange={() => setGps(!gps)} />
+            GPS
+        </label><br />
+        <label>
+            <input type="checkbox" checked={safetySeat} onChange={() => setSafetySeat(!safetySeat)} />
+            Child Safety Seat
+        </label><br />
+        <label>
+            <input type="checkbox" checked={fuelService} onChange={() => setFuelService(!fuelService)} />
+            Fuel Service
+        </label><br />
+        <label>
+            <input type="checkbox" checked={insurance} onChange={() => setInsurance(!insurance)} />
+            Insurance
+        </label><br /> <br />
+        </div>
+
         <button onClick={handleConfirm}>Confirm</button>
         <button onClick={onClose}>Cancel</button>
       </div>
@@ -46,7 +73,7 @@ const CarCard = ({ car }) => {
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
-  const bookReservation = async (startDate, startTime, endDate, endTime) => {
+  const bookReservation = async (startDate, startTime, endDate, endTime, gps, safetySeat, fuelService, insurance) => {
     closeModal();
     const token = localStorage.getItem('token');
     if (!token) {
@@ -65,7 +92,11 @@ const CarCard = ({ car }) => {
         user: userId,
         car: _id,
         startDate: formattedStartDate,
-        endDate: formattedEndDate
+        endDate: formattedEndDate,
+        gps,
+        safetySeat,
+        fuelService,
+        insurance
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -101,6 +132,7 @@ const CarCard = ({ car }) => {
           isOpen={isModalOpen}
           onClose={closeModal}
           onConfirm={bookReservation}
+          car={car}
          />
         </>
         );
