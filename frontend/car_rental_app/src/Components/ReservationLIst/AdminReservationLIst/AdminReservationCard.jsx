@@ -1,8 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminReservationCard = ({ reservation, car, onDelete, onUpdate }) => {
+  const navigate = useNavigate();
   if (!car) return null; // Render nothing if car details are not provided
-
+ 
+ 
+  const handleCheckIn = () => {
+    navigate('/CheckIn'); // Assuming '/checkin' is the route to the CheckInPage
+  };
   // Function to format date and time
   const formatDateTime = (dateString) => {
     const options = {
@@ -18,7 +24,7 @@ const AdminReservationCard = ({ reservation, car, onDelete, onUpdate }) => {
       <p>Start Date: {formatDateTime(reservation.startDate)}</p>
       <p>End Date: {formatDateTime(reservation.endDate)}</p>
       <div>
-        <button>Check In</button>
+        <button onClick={handleCheckIn}>Check In</button>
         <button onClick={() => onUpdate(reservation._id)} style={{ backgroundColor: 'green', color: 'white' }}>Update Reservation</button>
         <button onClick={() => onDelete(reservation._id)} style={{ backgroundColor: 'red', color: 'white', marginLeft: '10px' }}>Delete Reservation</button>
       </div>

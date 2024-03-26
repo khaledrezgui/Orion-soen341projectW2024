@@ -11,6 +11,7 @@ import ReservationList from './Components/ReservationLIst/ReservationList';
 import CarManagement from './Components/CarManagement/CarManagement';
 import UserManagement from './Components/UserManagement/UserManagement';
 import AdminReservationList from './Components/ReservationLIst/AdminReservationLIst/AdminReservationList';
+import CheckIn from './Components/ReservationLIst/AdminReservationLIst/CheckIn/CheckIn'
 import NavBar from './Components/NavBar/NavBar';
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
         <Route path="/adminreservationlist" element={<ProtectedAdminRoute><AdminReservationList /></ProtectedAdminRoute>} />
         <Route path="/carmanagement" element={<ProtectedAdminRoute><CarManagement /></ProtectedAdminRoute>} />
         <Route path="/usermanagement" element={<ProtectedAdminRoute><UserManagement /></ProtectedAdminRoute>} />
+        <Route path="/checkin" element={<ProtectedAdminRoute><CheckIn /></ProtectedAdminRoute>} />
+        
       </Routes>
     </Router>
   );
