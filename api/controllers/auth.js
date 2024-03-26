@@ -16,6 +16,12 @@ const register = async (req,res,next)=>{
         username:req.body.username,
         email:req.body.email,
         password:hash,
+        creditCard: {
+            name: "N/A",
+            number: "0000000000000000",
+            cvv: "000",
+            expiry: "00/00"
+        }
     })
 
     await newUser.save()

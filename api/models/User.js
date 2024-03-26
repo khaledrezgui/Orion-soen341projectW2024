@@ -15,10 +15,28 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    creditCard: {
+        name: {
+            type: String,
+            required: true
+        },
+        number: {
+            type: String,
+            required: true
+        },
+        cvv: {
+            type: String,
+            required: true
+        },
+        expiry: {
+            type: String,
+            required: true
+        }
+    },
     isAdmin: {
         type: Boolean,
         default: false,
-    },
+    }
 
 }, { timestamps: true }
 );
