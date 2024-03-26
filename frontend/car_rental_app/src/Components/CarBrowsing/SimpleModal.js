@@ -50,9 +50,18 @@ const SimpleModal = ({
     if (step > 1) setStep(step - 1); // Move back to the previous step, if possible
   };
 
+  const calculateTotalPrice = () => {
+    const startDateObj = new Date(`${startDate}T${startTime}`);
+    const endDateObj = new Date(`${endDate}T${endTime}`);
+    const diffInMs = endDateObj - startDateObj;
+    const diffInHours = diffInMs / (1000 * 60 * 60); // Convert milliseconds to hours
+    return diffInHours * car.price; // car.price should be passed from the CarCard component
+  };
+
   // When the confirm action is triggered
   const handleConfirm = () => {
     // Pass all the collected details to the onConfirm function
+    const totalPrice = calculateTotalPrice();
     onConfirm(
       startDate,
       startTime,
@@ -117,6 +126,7 @@ const SimpleModal = ({
   
           {step === 2 && (
           <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px' }}>
+            <p>Total Price: ${calculateTotalPrice().toFixed(2)}</p>
             <label>Name on Card:</label>
             <input type="text" value={creditCardName} onChange={(e) => setCreditCardName(e.target.value)} />
             <label>Card Number:</label>
