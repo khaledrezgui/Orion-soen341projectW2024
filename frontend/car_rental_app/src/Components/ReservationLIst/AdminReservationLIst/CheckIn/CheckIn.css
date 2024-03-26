@@ -1,16 +1,10 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 body {
-    font-family: Arial;
     background-color: #d3d9cc;
-    color: #333;
 }
 
 .form-container {
+    box-sizing: border-box;
     width: 80%;
     max-width: 750px;
     margin: 50px auto;

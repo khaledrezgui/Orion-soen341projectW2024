@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import './Confirmation.css'; 
 
 const Confirmation = () => {
     const { reservationId } = useParams();
@@ -25,7 +26,7 @@ const Confirmation = () => {
                 setReservation(reservationResponse.data);
                 const carId = reservationResponse.data.car;
                 const userId = reservationResponse.data.user;
-
+                
                 const carResponse = await axios.get(`/cars/${carId}`);
                 const userResponse = await axios.get(`/users/${userId}`);
 
@@ -42,11 +43,28 @@ const Confirmation = () => {
 
     if (!reservation || !car) return <p>Loading...</p>;
 
+    const formatDateTime = (dateString) => {
+        const options = {
+          year: 'numeric', month: 'short', day: 'numeric',
+          hour: '2-digit', minute: '2-digit', hour12: false
+        };
+        return new Date(dateString).toLocaleString([], options);
+    };
+
     return (
-        <div>
+        <div className="confirmation-container">
             <h2>{user.username}, Reservation Confirmation</h2>
-            <p>You have reserved {car.make} {car.model}.</p>
-            <p>Reservation Dates: {new Date(reservation.startDate).toLocaleDateString()} to {new Date(reservation.endDate).toLocaleDateString()}</p>
+            <p>You have reserved: {car.make} {car.model} ({car.year}).</p>
+            <div className="date-box">
+                <p>Reservation Dates: <span className="date-box">{formatDateTime(reservation.startDate)}</span> to  <span className="date-box">{formatDateTime(reservation.endDate)}</span></p>
+            </div>
+
+            <p>Selected additional services: 
+                {reservation.gps && <span> GPS</span>}
+                {reservation.safetySeat && <span>, Child Safety Seat</span>}
+                {reservation.fuelService && <span>, Fuel Service</span>}
+                {reservation.insurance && <span>, Insurance</span>}
+            </p>
         </div>
     );
 };
