@@ -13,6 +13,9 @@ This car rental application makes it easy for customers to rent vehicles by allo
 |Khaled Rezgui|40176606|khaledrezguipro@gmail.com|Full Stack|
 |Safaa Kentaoui|40228872|s_kentao@live.ca|Full Stack|
 
+# Meeting Minutes
+Meeting minutes can be found inside of the Wiki page of the Github
+
 # App Walkthrough Demo
 https://www.youtube.com/watch?v=-CFms3P5E5o
 
