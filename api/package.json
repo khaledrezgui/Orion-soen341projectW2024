@@ -1,7 +1,6 @@
 {
   "name": "orion-soen341projectw2024",
   "version": "1.0.0",
-  "homepage": "https://sknt11.github.io/Orion-soen341projectW2024",
   "description": "The objective of this project is to create a workable website for a car rental company, which will allow the users to rent cars for various periods of time.",
   "main": "index.js",
   "scripts": {
