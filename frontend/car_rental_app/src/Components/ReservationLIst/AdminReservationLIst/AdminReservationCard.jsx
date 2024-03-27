@@ -9,6 +9,11 @@ const AdminReservationCard = ({ reservation, car, onDelete, onUpdate }) => {
   const handleCheckIn = () => {
     navigate(`/checkin/${reservation._id}`); 
   };
+
+  const handleCheckOut =() => {
+    navigate(`/checkout/${reservation._id}`)
+  };
+
   // Function to format date and time
   const formatDateTime = (dateString) => {
     const options = {
@@ -31,6 +36,7 @@ const AdminReservationCard = ({ reservation, car, onDelete, onUpdate }) => {
       </p>
       <div>
         <button onClick={handleCheckIn} class="checkin-btn">Check In</button>
+        <button onClick={handleCheckOut} class="checkout-btn">Check Out</button>
         <button onClick={() => onUpdate(reservation._id)} class="update-btn">Update Reservation</button>
         <button onClick={() => onDelete(reservation._id)} class="delete-btn">Delete Reservation</button>
       </div>

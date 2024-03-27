@@ -11,9 +11,11 @@ import ReservationList from './Components/ReservationLIst/ReservationList';
 import CarManagement from './Components/CarManagement/CarManagement';
 import UserManagement from './Components/UserManagement/UserManagement';
 import AdminReservationList from './Components/ReservationLIst/AdminReservationLIst/AdminReservationList';
-import CheckIn from './Components/ReservationLIst/AdminReservationLIst/CheckIn/CheckIn'
+import CheckIn from './Components/ReservationLIst/AdminReservationLIst/CheckIn/CheckIn';
+import CheckOut from './Components/ReservationLIst/AdminReservationLIst/CheckOut/CheckOut';
 import NavBar from './Components/NavBar/NavBar';
-import AdminConfirmation from './Components/ReservationLIst/AdminReservationLIst/CheckIn/AdminConfirmation'
+import AdminConfirmation from './Components/ReservationLIst/AdminReservationLIst/CheckIn/AdminConfirmation';
+import CheckOutConfirmation from './Components/ReservationLIst/AdminReservationLIst/CheckOut/CheckOutConfirmation';
 
 function App() {
   return (
@@ -30,7 +32,9 @@ function App() {
         <Route path="/carmanagement" element={<ProtectedAdminRoute><CarManagement /></ProtectedAdminRoute>} />
         <Route path="/usermanagement" element={<ProtectedAdminRoute><UserManagement /></ProtectedAdminRoute>} />
         <Route path="/checkin/:reservationId" element={<ProtectedAdminRoute><CheckIn /></ProtectedAdminRoute>} />
+        <Route path="/checkout/:reservationId" element={<ProtectedAdminRoute><CheckOut /></ProtectedAdminRoute>} />
         <Route path="/ReservationConfirmtion/:reservationId" element={<ProtectedAdminRoute><AdminConfirmation /></ProtectedAdminRoute>} />
+        <Route path="/checkoutconfirmation/:reservationId" element={<ProtectedAdminRoute><CheckOutConfirmation /></ProtectedAdminRoute>} />
       </Routes>
     </Router>
   );

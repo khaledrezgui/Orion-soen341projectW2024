@@ -132,9 +132,9 @@ const CheckIn = () => {
             <textarea rows="4" cols="50" />
           </label>
           <button className="confirm-button" onClick={handleConfirmReservation}>Confirm Reservation</button>
-          <button onClick={handleCancelReservation}>Cancel Reservation</button>
         </div>
       )}
+      <button className = "cancel-btn" onClick={handleCancelReservation}>Cancel Reservation</button>
     </div>
   );
 };
