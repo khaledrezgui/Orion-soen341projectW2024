@@ -31,7 +31,7 @@ const CheckOut = () => {
         const lastFourDigits = user.creditCard.number.slice(-4);
         navigate(`/checkoutconfirmation/${reservationId}`, {
             state: {
-              message: `CAD $${reservation.totalPrice.toFixed(2)} were taken from credit card ending with ${lastFourDigits}.CAD $500 were sent back to the bank.`,
+              message: `CAD $${reservation.totalPrice.toFixed(2)} were taken from credit card ending with ${lastFourDigits}. CAD $500 were sent back to the bank.`,
               reservationDetails: {
                 carModel: 'Model Placeholder',
                        startDate: reservation.startDate,
