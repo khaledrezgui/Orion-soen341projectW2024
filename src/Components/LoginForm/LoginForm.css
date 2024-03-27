@@ -1,0 +1,66 @@
+/* Reset some styles for the form and its elements */
+.wrapper form {
+    border: 3px solid #f1f1f1;
+    max-width: 420px; 
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+  }
+  
+  .wrapper .input-box input[type="text"], 
+  .wrapper .input-box input[type="password"] {
+    width: calc(100% - 40px); 
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .wrapper .input-box {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .error-message {
+    color: red;
+    margin-bottom: 1rem; 
+    text-align: center; 
+  }
+  
+  
+  .icon {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+  }
+  
+  .wrapper button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .wrapper button:hover {
+    opacity: 0.8;
+  }
+  
+  .wrapper .register-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 300px) {
+    .wrapper .cancelbtn {
+      width: 100%;
+    }
+  }
+  

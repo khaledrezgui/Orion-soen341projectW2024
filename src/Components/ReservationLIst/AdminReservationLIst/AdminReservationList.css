@@ -1,0 +1,62 @@
+.reservation-list {
+    padding: 4rem;
+    color: #333; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0; 
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .reservation-card {
+    background: #ffffff; 
+    color: #333; 
+    padding: 20px;
+    border-radius: 10px;
+    width: 450px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+  }
+  
+  .reservation-card h3, .reservation-card p {
+    color: #333; 
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .update-btn, .delete-btn, .checkin-btn {
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold; 
+    margin:5px;
+  }
+  
+  .checkin-btn{
+    background-color: cadetblue;
+    color: white;
+
+  }
+  
+  .update-btn {
+    background-color: #4CAF50; 
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
