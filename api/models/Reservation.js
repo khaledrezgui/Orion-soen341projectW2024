@@ -33,6 +33,10 @@ const ReservationSchema = new mongoose.Schema({
     insurance: {
         type: Boolean,
         required: true
+    },
+    totalPrice: {
+        type : Number,
+        required: true
     }
     
 });

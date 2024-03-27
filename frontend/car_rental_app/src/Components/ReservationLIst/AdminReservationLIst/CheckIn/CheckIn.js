@@ -34,8 +34,13 @@ const CheckIn = () => {
           message: `$500 CAD were taken from credit card ending with ${lastFourDigits}.`,
           reservationDetails: {
             carModel: 'Model Placeholder',
-            startDate: reservation.startDate,
-            endDate: reservation.endDate,
+                   startDate: reservation.startDate,
+                    endDate: reservation.endDate,
+                    gps: reservation.gps ? 'Included' : 'Not Included',
+                    safetySeat: reservation.safetySeat ? 'Included' : 'Not Included',
+                    fuelService: reservation.fuelService ? 'Included' : 'Not Included',
+                    insurance: reservation.insurance ? 'Included' : 'Not Included',
+                    totalPrice: reservation.totalPrice
           }
         }
       });
