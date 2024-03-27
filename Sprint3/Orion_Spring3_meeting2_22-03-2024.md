@@ -3,6 +3,6 @@
 Date: [22/03/2024]
 Time: [14:45] to [16:25] (Total Duration: 1h40mins)
 
-Attendance: Jadon, Matia, Khaled, Safaa
+- Attendance: Jadon, Matia, Khaled, Safaa
 
-- Description
+- Description: Team meeting during lab time / discussion of task and progress check
