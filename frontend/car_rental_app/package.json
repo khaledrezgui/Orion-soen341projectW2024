@@ -2,7 +2,7 @@
   "name": "car_rental_app",
   "homepage": "https://sknt11.github.io/Orion-soen341projectW2024/",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
