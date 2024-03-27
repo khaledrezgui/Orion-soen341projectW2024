@@ -1,21 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import TermsAndConditions from './terms';
 import './CheckIn.css';
 
 const CheckIn = () => {
- const [answers, setAnswers] = useState({
+  const { reservationId } = useParams();
+  const navigate = useNavigate();
+  const [reservation, setReservation] = useState(null);
+  const [user, setUser] = useState(null); // Add state to store user details
+
+  useEffect(() => {
+    const fetchReservationDetails = async () => {
+      try {
+        const response = await axios.get(`/reservations/${reservationId}`);
+        setReservation(response.data);
+        // After fetching reservation, fetch user details
+        const userResponse = await axios.get(`/users/${response.data.user}`);
+        setUser(userResponse.data); // Store fetched user details
+      } catch (error) {
+        console.error('Error fetching details:', error);
+      }
+    };
+    fetchReservationDetails();
+  }, [reservationId]);
+
+  const handleConfirmReservation = () => {
+
+    if (user && user.creditCard && user.creditCard.number) {
+      const lastFourDigits = user.creditCard.number.slice(-4);
+      navigate(`/ReservationConfirmtion/${reservationId}`, {
+        state: {
+          message: `$500 CAD were taken from credit card ending with ${lastFourDigits}.`,
+          reservationDetails: {
+            carModel: 'Model Placeholder',
+            startDate: reservation.startDate,
+            endDate: reservation.endDate,
+          }
+        }
+      });
+    } else {
+      console.error("Credit card details are not available.");
+    }
+  };
+
+
+  const handleCancelReservation = async () => {
+    try {
+      await axios.delete(`/reservations/${reservationId}`);
+      navigate('/browse'); // Navigate back to reservations list or another appropriate page
+    } catch (error) {
+      console.error('Error canceling reservation:', error);
+    }
+  };
+
+  const [answers, setAnswers] = useState({
     q1: null,
     q2: null,
     q3: null,
     q4: null,
     q5: null,
- });
+  });
 
- const handleChange = (e) => {
+  const [showTerms, setShowTerms] = useState(false);
+  const [showSignature, setShowSignature] = useState(false);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setAnswers(prevAnswers => ({ ...prevAnswers, [name]: value }));
- };
+  };
 
- const allYes = Object.values(answers).every(answer => answer === "Yes");
+  const allYes = Object.values(answers).every(answer => answer === "Yes");
+
+  const handleAcceptTerms = () => {
+    setShowTerms(false); // Hide terms
+    setShowSignature(true); // Show signature form
+  };
+
+  
 
  return (
     <div className='form-container'>
@@ -43,17 +105,33 @@ const CheckIn = () => {
       <input type="radio" name="q5" value="Yes" onChange={handleChange} /> Yes
       <input type="radio" name="q5" value="No" onChange={handleChange} /> No
 
-      {allYes && (
+           
+      {allYes && !showTerms && !showSignature && (
+        <div>
+          <button className="terms-button" onClick={() => setShowTerms(true)}>View Terms and Conditions</button>
+        </div>
+      )}
+
+      {showTerms && (
+        <div>
+          <TermsAndConditions></TermsAndConditions>
+          <button className="accept-button" onClick={handleAcceptTerms}>Accept</button>
+          <button className="decline-button" onClick={() => setShowTerms(false)}>Decline</button>
+        </div>
+      )}
+
+      {showSignature && (
         <div>
           <label>
-            Enter customer signature here:<br/>
+            Enter customer signature here:<br />
             <textarea rows="4" cols="50" />
           </label>
-          <button className="confirm-button">Confirm Reservation</button>
+          <button className="confirm-button" onClick={handleConfirmReservation}>Confirm Reservation</button>
+          <button onClick={handleCancelReservation}>Cancel Reservation</button>
         </div>
       )}
     </div>
- );
+  );
 };
 
 export default CheckIn;

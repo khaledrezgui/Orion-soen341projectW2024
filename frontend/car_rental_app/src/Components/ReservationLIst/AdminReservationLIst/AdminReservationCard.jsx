@@ -7,7 +7,7 @@ const AdminReservationCard = ({ reservation, car, onDelete, onUpdate }) => {
  
  
   const handleCheckIn = () => {
-    navigate('/CheckIn'); // Assuming '/checkin' is the route to the CheckInPage
+    navigate(`/checkin/${reservation._id}`); 
   };
   // Function to format date and time
   const formatDateTime = (dateString) => {
