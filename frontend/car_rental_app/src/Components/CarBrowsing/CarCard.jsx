@@ -15,12 +15,15 @@ const CarCard = ({ car }) => {
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
-  const sendConfirmationEmail = (email, username, reservationId) => {
+  const sendConfirmationEmail = (email, username, reservationId, carDetails, startDate, endDate) => {
+    // Assuming carDetails is an object with car.make, car.model, and car.year
+    const { make, model, year } = carDetails;
+
     // Setup your EmailJS parameters, ensuring they match your template's requirements
     const templateParams = {
       to_name: username,
       to_email: email,
-      message: `Your booking for ${car.make} ${car.model} (${car.year}) is confirmed! Reservation ID: ${reservationId}`,
+      message: `Your booking for ${make} ${model} (${year}) is confirmed! Reservation ID: ${reservationId}. The reservation is from ${startDate} to ${endDate}. Come to Concordia Hall building before the reservation to CheckIn.`,
     };
 
     // Sending the email using EmailJS
@@ -88,7 +91,7 @@ const CarCard = ({ car }) => {
         const { email, username } = userResponse.data;
 
         // Send confirmation email
-        sendConfirmationEmail(email, username, response.data._id);
+        sendConfirmationEmail(email, username, response.data._id, { make: car.make, model: car.model, year: car.year }, startDate, endDate);
         
         navigate(`/confirmation/${response.data._id}`);
       }
