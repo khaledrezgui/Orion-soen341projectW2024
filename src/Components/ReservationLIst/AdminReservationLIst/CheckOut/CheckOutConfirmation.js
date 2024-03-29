@@ -15,10 +15,10 @@ const CheckOutConfirmation = () => {
           <p>Car Model: {reservationDetails.carModel}</p>
           <p>Start Date: {new Date(reservationDetails.startDate).toDateString()} {new Date(reservationDetails.startDate).toTimeString()} </p>
           <p>End Date: {new Date(reservationDetails.endDate).toDateString()} {new Date(reservationDetails.endDate).toTimeString()}</p>
-          <p>GPS: {reservationDetails.gps ? 'Included' : 'Not Included'}</p>
-          <p>Child Safety Seat: {reservationDetails.safetySeat ? 'Included' : 'Not Included'}</p>
-          <p>Fuel Service: {reservationDetails.fuelService ? 'Included' : 'Not Included'}</p>
-          <p>Insurance: {reservationDetails.insurance ? 'Included' : 'Not Included'}</p>
+          <p>GPS: {(reservationDetails.gps === true) ? 'Included' : 'Not Included'}</p>
+          <p>Child Safety Seat: {(reservationDetails.safetySeat === true) ? 'Included' : 'Not Included'}</p>
+          <p>Fuel Service: {(reservationDetails.fuelService === true) ? 'Included' : 'Not Included'}</p>
+          <p>Insurance: {(reservationDetails.insurance === true) ? 'Included' : 'Not Included'}</p>
         </div>
       )}
     </div>

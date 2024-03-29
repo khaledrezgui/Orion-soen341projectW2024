@@ -36,10 +36,10 @@ const CheckOut = () => {
                 carModel: 'Model Placeholder',
                        startDate: reservation.startDate,
                         endDate: reservation.endDate,
-                        gps: reservation.gps ? 'Included' : 'Not Included',
-                        safetySeat: reservation.safetySeat ? 'Included' : 'Not Included',
-                        fuelService: reservation.fuelService ? 'Included' : 'Not Included',
-                        insurance: reservation.insurance ? 'Included' : 'Not Included',
+                        gps: (reservation.gps === true) ? 'Included' : 'Not Included',
+                        safetySeat: (reservation.safetySeat === true) ? 'Included' : 'Not Included',
+                        fuelService: (reservation.fuelService === true) ? 'Included' : 'Not Included',
+                        insurance: (reservation.insurance === true) ? 'Included' : 'Not Included',
                         totalPrice: reservation.totalPrice
               }
             }
