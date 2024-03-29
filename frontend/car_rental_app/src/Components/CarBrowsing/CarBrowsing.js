@@ -21,7 +21,7 @@ const [filterYear, setFilterYear] = useState(0); // Similarly, 0 for no filter
   const [codes, setCodes] = useState({
     postalCodes: [
       { code: 'H3Z 2Y7', nearestBranchId: '65fb9e287900386958743b6b' },
-      { code: 'H3Z 2Y7', nearestBranchId: '65fb9e287900386958743b6b' },
+      { code: 'H3S 2L5', nearestBranchId: '65fb9e287900386958743b6b' },
       { code: 'H4B 1R6', nearestBranchId: '65fb9f527900386958743b6d' }
     ],
     airportCodes: [
