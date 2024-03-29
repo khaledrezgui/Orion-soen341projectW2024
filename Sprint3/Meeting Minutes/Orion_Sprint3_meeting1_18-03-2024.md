@@ -1,5 +1,5 @@
 Sprint 3
-# Orion Meeting 1 
+# Sprint 3 Orion Meeting 1 
 Date: [18/02/2024]
 Time: [15:00] to [15:30] (Total Duration: 30mins)
 
