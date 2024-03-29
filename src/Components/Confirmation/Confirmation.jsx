@@ -51,10 +51,14 @@ const Confirmation = () => {
         return new Date(dateString).toLocaleString([], options);
     };
 
+    
+    const lastFourDigits = user.creditCard?.number?.slice(-4);
+
     return (
         <div className="confirmation-container">
             <h2>{user.username}, Reservation Confirmation</h2>
             <p>You have reserved: {car.make} {car.model} ({car.year}).</p>
+            <p>Payment charged to card ending in <strong>{lastFourDigits}</strong></p>
             <div className="date-box">
                 <p>Reservation Dates: <span className="date-box">{formatDateTime(reservation.startDate)}</span> to  <span className="date-box">{formatDateTime(reservation.endDate)}</span></p>
             </div>
