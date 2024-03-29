@@ -24,7 +24,10 @@ const createReservation = async (req, res) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
     const durationInHours = (end - start) / (1000 * 60 * 60);
-    const totalPrice = durationInHours * carDetails.price; 
+
+    // Calculate additional charges based on selected features
+    const additionalServicesPrice = (gps + safetySeat + fuelService + insurance) * 50;
+    const totalPrice = durationInHours * carDetails.price + additionalServicesPrice; 
 
     try {
         if (await checkOverlappingReservations(car, startDate, endDate)) {
@@ -40,7 +43,7 @@ const createReservation = async (req, res) => {
             safetySeat,
             fuelService,
             insurance,
-            totalPrice 
+            totalPrice // Include total price calculation with additional services
         });
 
         await reservation.save();
@@ -51,6 +54,7 @@ const createReservation = async (req, res) => {
 };
 
 
+
 // UPDATE
 const updateReservation = async (req, res) => {
     try {
@@ -59,30 +63,34 @@ const updateReservation = async (req, res) => {
             return res.status(404).send({ message: 'Reservation not found.' });
         }
 
-        // Check if the car details are needed to be fetched
         const carDetails = await Car.findById(reservationToUpdate.car);
         if (!carDetails) {
             return res.status(404).send({ message: 'Car not found.' });
         }
 
-        // Determine if the start and end dates are being updated
         const startDate = req.body.startDate ? new Date(req.body.startDate) : reservationToUpdate.startDate;
         const endDate = req.body.endDate ? new Date(req.body.endDate) : reservationToUpdate.endDate;
+        const durationInHours = (endDate - startDate) / (1000 * 60 * 60);
 
-        // Calculate the new total price if either date has changed
-        if (req.body.startDate || req.body.endDate) {
-            const durationInHours = (endDate - startDate) / (1000 * 60 * 60);
-            req.body.totalPrice = durationInHours * carDetails.price; 
-        }
+        // Include logic to determine which additional services are selected
+        const gps = req.body.gps !== undefined ? req.body.gps : reservationToUpdate.gps;
+        const safetySeat = req.body.safetySeat !== undefined ? req.body.safetySeat : reservationToUpdate.safetySeat;
+        const fuelService = req.body.fuelService !== undefined ? req.body.fuelService : reservationToUpdate.fuelService;
+        const insurance = req.body.insurance !== undefined ? req.body.insurance : reservationToUpdate.insurance;
 
-        // Update the reservation with the potentially new dates and recalculated total price
-        const updatedReservation = await Reservation.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        // Calculate additional charges based on selected features
+        const additionalServicesPrice = (gps + safetySeat + fuelService + insurance) * 50;
+        const totalPrice = durationInHours * carDetails.price + additionalServicesPrice;
+
+        // Update the reservation with new details and recalculated total price
+        const updatedReservation = await Reservation.findByIdAndUpdate(req.params.id, { ...req.body, totalPrice }, { new: true });
 
         res.status(200).json(updatedReservation);
     } catch (error) {
         res.status(400).send(error);
     }
 };
+
 
 
 // DELETE
