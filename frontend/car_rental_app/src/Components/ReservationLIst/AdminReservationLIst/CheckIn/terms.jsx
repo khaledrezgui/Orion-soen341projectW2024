@@ -15,10 +15,11 @@ const TermsAndConditions = ({
   const formattedStartDate = new Date(startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
   const formattedEndDate = new Date(endDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
   
+  const rentalAgreementNumber = Math.floor(Math.random() * 9000000) + 1000000;
   return (
   <div>
     <h3>Rental Agreement</h3>
-    <p>Rental Agreement Number:</p>
+    <p>Rental Agreement Number: {rentalAgreementNumber}</p>
 
     <p>This Rental Agreement is entered into between Car Rental App, located at Concordia University, Montreal Canada, hereinafter referred to as the "Rental Company," and the individual or entity identified below, hereinafter referred to as the "Renter":</p>
 
@@ -26,7 +27,7 @@ const TermsAndConditions = ({
       1. Renter's Information:<br /><br />
       Name: {renterName}<br />
       Email Address: {renterEmail}<br />
-      Driver's License Number: <input type="text"></input><br /><br />
+      Driver's License Number: <input type="text" placeholder="License Number"></input><br /><br />
       2. Vehicle Information:<br /><br />
       Make: {carMake}<br />
       Model: {carModel}<br />
