@@ -90,8 +90,6 @@ const SimpleModal = ({
       safetySeat,
       fuelService,
       insurance,
-      pickLocation,
-      dropLocation,
       {
         name: creditCardName,
         number: creditCardNumber,
