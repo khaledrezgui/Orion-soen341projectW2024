@@ -14,7 +14,11 @@ Tasks done per each team member and what they will work on.
 - Jadon : Seperated user stories into working tasks, will work on previous unit tests that were failing.
 - Matia : Has worked on authentification process, will work on UML diagrams.
 - Safaa : Made a plan for the backend structure for the sprint 2 processes, will work on implementing new models.
-  
+
+Plan for next meeting:
+- Discuss what each member is working on and what they will work with during the week.
+- Gather information about implementation using UML diagrams
+
 Agenda
 1. Discussion on task distribution for project.
 2. Allocation of user stories to team members.
