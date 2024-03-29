@@ -1,8 +1,8 @@
-const { createCar } = require('./controllers/car');
-const Car = require('./models/Car');
+const { createCar } = require('./car');
+const Car = require('../models/Car');
 
 // Mock the Car model
-jest.mock('./models/Car', () => {
+jest.mock('../models/Car', () => {
   return jest.fn().mockImplementation(() => {
     return {
       save: jest.fn().mockResolvedValue({
