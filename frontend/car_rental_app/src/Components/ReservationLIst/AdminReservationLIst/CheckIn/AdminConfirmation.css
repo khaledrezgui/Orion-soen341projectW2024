@@ -1,0 +1,44 @@
+.confirmation-container {
+    padding: 20px;
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white; /* or any color you prefer */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: auto; /* or any specific width */
+    max-width: 90%; /* ensures it doesn't stretch too wide on larger screens */
+  }
+  
+  .confirmation-message {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  
+  .reservation-details {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .reservation-details p {
+    margin: 10px 0;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .reservation-details p span {
+    font-weight: bold;
+  }
+  
+  .included {
+    color: #4CAF50;
+  }
+  
+  .not-included {
+    color: #F44336;
+  }
+  
