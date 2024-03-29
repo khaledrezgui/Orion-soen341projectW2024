@@ -6,15 +6,15 @@ const CarSchema = new mongoose.Schema({
         required: true
     },
     branchId: {
-        type : String,
-        required: true
+        type: String,
+        default: "6603983fe8160304628dd514"
     },
     model: {
         type: String,
         required: true
     },
     year: {
-        type: String, 
+        type: String,
         required: true
     },
     type: {
@@ -26,7 +26,7 @@ const CarSchema = new mongoose.Schema({
         required: true
     },
     photos: {
-        type: [String], 
+        type: [String],
     },
     price: {
         type: Number,
