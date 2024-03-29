@@ -18,19 +18,19 @@ const UserSchema = new mongoose.Schema({
     creditCard: {
         name: {
             type: String,
-            required: true
+            default: "FName LName"
         },
         number: {
             type: String,
-            required: true
+            default: "0000000000000000"
         },
         cvv: {
             type: String,
-            required: true
+            default:"123"
         },
         expiry: {
             type: String,
-            required: true
+            default:"00/00"
         }
     },
     isAdmin: {
