@@ -68,24 +68,19 @@ const updateReservation = async (req, res) => {
             return res.status(404).send({ message: 'Car not found.' });
         }
 
-        const startDate = req.body.startDate ? new Date(req.body.startDate) : reservationToUpdate.startDate;
-        const endDate = req.body.endDate ? new Date(req.body.endDate) : reservationToUpdate.endDate;
-        const durationInHours = (endDate - startDate) / (1000 * 60 * 60);
+        reservationToUpdate.startDate = req.body.startDate ? new Date(req.body.startDate) : reservationToUpdate.startDate;
+        reservationToUpdate.endDate = req.body.endDate ? new Date(req.body.endDate) : reservationToUpdate.endDate;
+        reservationToUpdate.gps = req.body.gps !== undefined ? req.body.gps : reservationToUpdate.gps;
+        reservationToUpdate.safetySeat = req.body.safetySeat !== undefined ? req.body.safetySeat : reservationToUpdate.safetySeat;
+        reservationToUpdate.fuelService = req.body.fuelService !== undefined ? req.body.fuelService : reservationToUpdate.fuelService;
+        reservationToUpdate.insurance = req.body.insurance !== undefined ? req.body.insurance : reservationToUpdate.insurance;
 
-        // Include logic to determine which additional services are selected
-        const gps = req.body.gps !== undefined ? req.body.gps : reservationToUpdate.gps;
-        const safetySeat = req.body.safetySeat !== undefined ? req.body.safetySeat : reservationToUpdate.safetySeat;
-        const fuelService = req.body.fuelService !== undefined ? req.body.fuelService : reservationToUpdate.fuelService;
-        const insurance = req.body.insurance !== undefined ? req.body.insurance : reservationToUpdate.insurance;
+        const durationInHours = (reservationToUpdate.endDate - reservationToUpdate.startDate) / (1000 * 60 * 60);
+        const additionalServicesPrice = (reservationToUpdate.gps + reservationToUpdate.safetySeat + reservationToUpdate.fuelService + reservationToUpdate.insurance) * 50;
+        reservationToUpdate.totalPrice = durationInHours * carDetails.price + additionalServicesPrice;
 
-        // Calculate additional charges based on selected features
-        const additionalServicesPrice = (gps + safetySeat + fuelService + insurance) * 50;
-        const totalPrice = durationInHours * carDetails.price + additionalServicesPrice;
-
-        // Update the reservation with new details and recalculated total price
-        const updatedReservation = await Reservation.findByIdAndUpdate(req.params.id, { ...req.body, totalPrice }, { new: true });
-
-        res.status(200).json(updatedReservation);
+        await reservationToUpdate.save();
+        res.status(200).json(reservationToUpdate);
     } catch (error) {
         res.status(400).send(error);
     }
