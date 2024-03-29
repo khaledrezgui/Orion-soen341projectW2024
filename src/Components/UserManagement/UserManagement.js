@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserCard from './UserCard';
 import EditUserModal from '../EditUserModal'; // Ensure this path is correct
+import AddUserModal from '../AddUserModal';
 import './UserManagement.css'; // Ensure this path is correct
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false); 
+
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -34,8 +37,15 @@ const UserManagement = () => {
 
   const handleEdit = (user) => {
     setSelectedUser(user);
+    setIsAddModalOpen(false); 
     setEditModalOpen(true);
   };
+
+  const handleAddNewUser = () => {
+    setIsAddModalOpen(true);
+    setEditModalOpen(false);
+  };
+
 
   const handleUpdateConfirm = async (userId, updatedUserDetails) => {
     try {
@@ -51,9 +61,23 @@ const UserManagement = () => {
     }
   };
 
+  const onAddModalConfirm = async (newUserDetails) => {
+    try {
+      await axios.post('/auth/register', newUserDetails);
+      // Refetch users to update the list
+      const updatedUsers = await axios.get('/users');
+      setUsers(updatedUsers.data);
+      setIsAddModalOpen(false);
+    } catch (error) {
+      console.error('Failed to add new user:', error);
+    }
+  };
+
+
   return (
     <div className="user-management">
       <h2>User Management</h2>
+      <button onClick={handleAddNewUser} className="add-new-user">Create New User</button>
       <div className="container">
         {users.map(user => (
           <UserCard
@@ -70,6 +94,13 @@ const UserManagement = () => {
           onClose={() => setEditModalOpen(false)}
           user={selectedUser}
           onConfirm={handleUpdateConfirm}
+        />
+        )}
+      {isAddModalOpen && (
+        <AddUserModal
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+          onConfirm={onAddModalConfirm}
         />
       )}
     </div>
