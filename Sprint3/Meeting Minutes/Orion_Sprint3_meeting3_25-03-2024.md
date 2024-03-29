@@ -14,6 +14,10 @@ Tasks done per each team member and what they will work on.
 - Matia : Has worked on a few UML diagrams, will modify them based on the feedback provided.
 - Safaa : Made progress in the backend to implement models and controllers for branches, will work on payment process (process 2).
 
+Plans for next meeting:
+- Discuss what each member is working on and what they will work on during the week.
+- Write necessary documentaion as a team and gather thoughts.
+  
 Agenda
 - Review Sprint 3 guidelines and core features to be implemented.
 - Plan development and testing for each core feature
