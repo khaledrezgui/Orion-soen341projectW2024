@@ -43,13 +43,13 @@ const CheckIn = () => {
         state: {
           message: `$500 CAD were taken from credit card ending with ${lastFourDigits}.`,
           reservationDetails: {
-            carModel: 'Model Placeholder',
+            carModel: car.make,
                    startDate: reservation.startDate,
                     endDate: reservation.endDate,
-                    gps: (reservation.gps === true) ? 'Included' : 'Not Included',
-                    safetySeat: (reservation.safetySeat === true) ? 'Included' : 'Not Included',
-                    fuelService: (reservation.fuelService === true) ? 'Included' : 'Not Included',
-                    insurance: (reservation.insurance === true) ? 'Included' : 'Not Included',
+                    gps: reservation.gps, 
+                    safetySeat: reservation.safetySeat,
+                    fuelService: reservation.fuelService, 
+                    insurance: reservation.insurance, 
                     totalPrice: reservation.totalPrice
           }
         }
