@@ -15,4 +15,6 @@ Tasks done per each team member and what they will work on.
 - Matia : Finished with UML diagrams, associated each ones with their corresponding user story.
 - Safaa : Helped jadon with unit tests, will finish with documentation.
 
+Plan for next meeting:
+- Start discussing sprint 4, what new feature will be implemented. How are the tasks going to be seperated based on the members skill.
 

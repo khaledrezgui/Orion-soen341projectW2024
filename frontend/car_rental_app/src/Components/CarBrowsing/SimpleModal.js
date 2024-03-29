@@ -24,6 +24,13 @@ const SimpleModal = ({
   const [creditCardCVV, setCreditCardCVV] = useState('');
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
 
+
+  const locationOptions = ['Concordia University Hall building H3G 2E9', 'Concordia Loyola Campus H4B 1R6', 'McGill University ', 'Montreal University H3T 1J4']  ;
+  
+  // Add state for dropLocation and pickLocation
+  const [dropLocation, setDropLocation] = useState('');
+  const [pickLocation, setPickLocation] = useState('');
+  
   // Reset all states to their initial values and close the modal
   const resetModal = () => {
     setStartDate('');
@@ -50,12 +57,24 @@ const SimpleModal = ({
     if (step > 1) setStep(step - 1); // Move back to the previous step, if possible
   };
 
+  const additionalServicePrice = 50; // Price for each additional service
+
   const calculateTotalPrice = () => {
     const startDateObj = new Date(`${startDate}T${startTime}`);
     const endDateObj = new Date(`${endDate}T${endTime}`);
     const diffInMs = endDateObj - startDateObj;
     const diffInHours = diffInMs / (1000 * 60 * 60); // Convert milliseconds to hours
-    return diffInHours * car.price; // car.price should be passed from the CarCard component
+    let basePrice = diffInHours * car.price; // Base price calculation
+
+    // Add additional services price
+    let additionalServicesCount = 0;
+    if (gps) additionalServicesCount++;
+    if (safetySeat) additionalServicesCount++;
+    if (fuelService) additionalServicesCount++;
+    if (insurance) additionalServicesCount++;
+
+    let additionalServicesPrice = additionalServicesCount * additionalServicePrice;
+    return basePrice + additionalServicesPrice; // Return total price including additional services
   };
 
   // When the confirm action is triggered
@@ -71,6 +90,8 @@ const SimpleModal = ({
       safetySeat,
       fuelService,
       insurance,
+      pickLocation,
+      dropLocation,
       {
         name: creditCardName,
         number: creditCardNumber,
@@ -84,11 +105,11 @@ const SimpleModal = ({
   if (!isOpen) return null;
   
     return (
-      <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'grey', padding: '20px', zIndex: 100,  border: '2px groove black', borderRadius: '10px', boxShadow: '2px 4px 4px rgba(0, 0, 0, 0.7)'}}>
-        <h2 style={{ textAlign: 'center', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>{`${car.make} ${car.model} (${car.year})`} - Reservation Details</h2>
-        
-        { step === 1 && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px' }}>
+      <div className="modal-container">
+      <h2 className="modal-header">{`${car.make} ${car.model} (${car.year})`} - Reservation Details</h2>
+      
+      {step === 1 && (
+        <div className="modal-content">
           <div>
             <label>Pickup Date: </label>
             <input type="date" value={startDate} min={minDate} max={maxDate} onChange={(e) => setStartDate(e.target.value)} />
@@ -100,7 +121,24 @@ const SimpleModal = ({
             <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
           </div>
           <div>
-          <h3 style={{ textAlign: 'center', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Additional services:</h3>
+          <label>Pick-up Location:</label>
+
+<select value={pickLocation} onChange={(e) => setPickLocation(e.target.value)}>
+  {locationOptions.map((location) => (
+    <option key={location} value={location}>{location}</option>
+  ))}
+</select>
+</div>
+<div>
+<label>Drop-off Location:</label>
+<select value={dropLocation} onChange={(e) => setDropLocation(e.target.value)}>
+  {locationOptions.map((location) => (
+    <option key={location} value={location}>{location}</option>
+  ))}
+</select>
+          </div>
+          <div>
+          <h3 style={{ textAlign: 'center', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Additional services (50$ per service):</h3>
           <label>
               <input type="checkbox" checked={gps} onChange={() => setGps(!gps)} />
               GPS
@@ -124,8 +162,8 @@ const SimpleModal = ({
         </div>
         )}
   
-          {step === 2 && (
-          <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px' }}>
+  {step === 2 && (
+        <form onSubmit={(e) => e.preventDefault()} className="modal-form">
             <p>Total Price: ${calculateTotalPrice().toFixed(2)}</p>
             <label>Name on Card:</label>
             <input type="text" value={creditCardName} onChange={(e) => setCreditCardName(e.target.value)} />

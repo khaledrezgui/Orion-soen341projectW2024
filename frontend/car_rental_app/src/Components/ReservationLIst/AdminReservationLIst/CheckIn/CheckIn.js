@@ -8,16 +8,26 @@ const CheckIn = () => {
   const { reservationId } = useParams();
   const navigate = useNavigate();
   const [reservation, setReservation] = useState(null);
-  const [user, setUser] = useState(null); // Add state to store user details
+  const [user, setUser] = useState(null);
+  const [car, setCar] = useState(null); // Add state for car details
+
+  const additionalServices = [];
+  if (reservation?.gps) additionalServices.push('GPS');
+  if (reservation?.safetySeat) additionalServices.push('Child Safety Seat');
+  if (reservation?.fuelService) additionalServices.push('Fuel Service');
+  if (reservation?.insurance) additionalServices.push('Insurance');
 
   useEffect(() => {
     const fetchReservationDetails = async () => {
       try {
         const response = await axios.get(`/reservations/${reservationId}`);
         setReservation(response.data);
-        // After fetching reservation, fetch user details
+        
         const userResponse = await axios.get(`/users/${response.data.user}`);
         setUser(userResponse.data); // Store fetched user details
+
+        const carResponse = await axios.get(`/cars/${response.data.car}`);
+        setCar(carResponse.data); // Store fetched car details
       } catch (error) {
         console.error('Error fetching details:', error);
       }
@@ -119,8 +129,17 @@ const CheckIn = () => {
 
       {showTerms && (
         <div>
-          <TermsAndConditions></TermsAndConditions>
-          <button className="accept-button" onClick={handleAcceptTerms}>Accept</button>
+        <TermsAndConditions
+          renterName={user?.username}
+          renterEmail={user?.email}
+          carMake={car?.make}
+          carModel={car?.model}
+          carYear={car?.year}
+          startDate={reservation?.startDate}
+          endDate={reservation?.endDate}
+          rentalRate={car?.price}
+          additionalServices={additionalServices}
+        />         <button className="accept-button" onClick={handleAcceptTerms}>Accept</button>
           <button className="decline-button" onClick={() => setShowTerms(false)}>Decline</button>
         </div>
       )}
