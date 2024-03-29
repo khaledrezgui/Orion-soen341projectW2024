@@ -50,12 +50,24 @@ const SimpleModal = ({
     if (step > 1) setStep(step - 1); // Move back to the previous step, if possible
   };
 
+  const additionalServicePrice = 50; // Price for each additional service
+
   const calculateTotalPrice = () => {
     const startDateObj = new Date(`${startDate}T${startTime}`);
     const endDateObj = new Date(`${endDate}T${endTime}`);
     const diffInMs = endDateObj - startDateObj;
     const diffInHours = diffInMs / (1000 * 60 * 60); // Convert milliseconds to hours
-    return diffInHours * car.price; // car.price should be passed from the CarCard component
+    let basePrice = diffInHours * car.price; // Base price calculation
+
+    // Add additional services price
+    let additionalServicesCount = 0;
+    if (gps) additionalServicesCount++;
+    if (safetySeat) additionalServicesCount++;
+    if (fuelService) additionalServicesCount++;
+    if (insurance) additionalServicesCount++;
+
+    let additionalServicesPrice = additionalServicesCount * additionalServicePrice;
+    return basePrice + additionalServicesPrice; // Return total price including additional services
   };
 
   // When the confirm action is triggered
@@ -100,7 +112,7 @@ const SimpleModal = ({
             <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
           </div>
           <div>
-          <h3 style={{ textAlign: 'center', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Additional services:</h3>
+          <h3 style={{ textAlign: 'center', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Additional services (50$ per service):</h3>
           <label>
               <input type="checkbox" checked={gps} onChange={() => setGps(!gps)} />
               GPS
