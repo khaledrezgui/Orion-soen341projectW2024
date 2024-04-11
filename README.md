@@ -6,12 +6,12 @@ The objective of this project is to create a workable website for a car rental c
 This car rental application makes it easy for customers to rent vehicles by allowing them to browse and select car options that fit their needs. It also allows customer service representatives to provide assistance for the customers and system administrators to manage the application’s data.
 
 # Team members
-| Team member | ID | email | Role |
-|-----|-----|-----|-----|
-|Matia Komsic|40175388|matiakomsic1@gmail.com|Full Stack|
-|Jandon Games|40173613|jadongames7@gmail.com|Full Stack|
-|Khaled Rezgui|40176606|khaledrezguipro@gmail.com|Full Stack|
-|Safaa Kentaoui|40228872|s_kentao@live.ca|Full Stack|
+| Team member | ID | Github ID| email | Role |
+|-----|-----|-----|-----|-----|
+|Matia Komsic|40175388|matiakc1|matiakomsic1@gmail.com|Full Stack|
+|Jandon Games|40173613|kidtoxic|jadongames7@gmail.com|Full Stack|
+|Khaled Rezgui|40176606|khaledrezgui|khaledrezguipro@gmail.com|Full Stack|
+|Safaa Kentaoui|40228872|skz11|s_kentao@live.ca|Full Stack|
 
 # Meeting Minutes
 Meeting minutes can be found inside of the "Wiki" page of the Github for Sprint 1, 2, 3 and 4
