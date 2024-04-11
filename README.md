@@ -14,7 +14,7 @@ This car rental application makes it easy for customers to rent vehicles by allo
 |Safaa Kentaoui|40228872|s_kentao@live.ca|Full Stack|
 
 # Meeting Minutes
-Meeting minutes can be found inside of the Wiki page of the Github
+Meeting minutes can be found inside of the "Wiki" page of the Github for Sprint 1, 2, 3 and 4
 
 # App Walkthrough Demo
 https://www.youtube.com/watch?v=-CFms3P5E5o
