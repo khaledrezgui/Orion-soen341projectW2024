@@ -1,40 +1,93 @@
 /* SimpleModal.css */
 .modal-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: grey;
-    padding: 20px;
-    z-index: 100;
-    border: 2px groove black;
-    border-radius: 10px;
-    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.7);
-  }
-  
-  .modal-header {
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .modal-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .additional-services {
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* Add other styles as needed */
-  
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #a59797; /* Light background */
+  padding: 30px; /* More padding for a spacious look */
+  z-index: 1000; /* Ensure it's on top */
+  border-radius: 8px; /* Softer border radius */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  max-width: 500px; /* Max width to avoid too wide modals on large screens */
+  width: 100%; /* Responsive width */
+}
+
+.modal-header {
+  font-size: 1.5em; /* Larger font size */
+  color: #333; /* Darker font for better readability */
+  margin-bottom: 20px; /* Space between header and content */
+}
+
+.modal-content, .modal-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Consistent spacing between elements */
+}
+
+input[type="date"], input[type="time"], input[type="text"], select {
+  padding: 10px;
+  border: 1px solid #000000; /* Lighter border */
+  border-radius: 5px; /* Softer border radius */
+  width: 100%; /* Full width inputs */
+  box-sizing: border-box; /* Border box for accurate width including padding */
+}
+
+.additional-services {
+  font-size: 1.1em;
+  margin-top: 20px; /* Space before additional services */
+  margin-bottom: 20px; /* Space after additional services */
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.1s; /* Smooth background and press effect */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  color: rgb(0, 0, 0);
+}
+
+button:active {
+  transform: scale(0.98); /* Press down effect */
+}
+
+/* Custom colors for confirm and cancel */
+.confirm-button {
+  background-color: #007bff; /* Bootstrap blue */
+  color: rgb(0, 0, 0); /* White text on primary button */
+}
+
+.cancel-button {
+  background-color: #6c757d; /* Bootstrap secondary */
+  color: rgb(0, 0, 0); /* White text on cancel button */
+  margin-left: 10px; /* Space between cancel and confirm */
+}
+
+/* Utility classes for text alignment */
+.text-center {
+  text-align: center;
+}
+
+.modal-container, .modal-header, .modal-content, .modal-form, input, select, button {
+  color: #000; /* Black text color */
+}
+
+/* If you specifically want only certain parts to have black text, adjust or add classes accordingly */
+.modal-header, .modal-content p, .modal-form label {
+  color: #000; /* Black text color for headers, paragraphs, and labels */
+}
+
+.modal-container {
+  border-radius: 20px; /* Rounded corners for the modal */
+}
+
+input, select, button {
+  border-radius: 10px; /* Smaller rounded corners for input fields and buttons for a subtle, modern look */
+}
