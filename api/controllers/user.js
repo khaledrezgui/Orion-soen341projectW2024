@@ -50,4 +50,16 @@ const getUsers = async (req,res,next)=>{
     }
 };
 
-module.exports = { createUser, updateUser, deleteUser, getUser, getUsers, };
+// user controller
+const getUsersByEmails = async (req, res) => {
+    try {
+      const emails = req.body.emails;
+      const users = await User.find({ email: { $in: emails } });
+      const userIds = users.map(user => user._id);
+      res.status(200).json(userIds);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  };
+
+module.exports = { createUser, updateUser, deleteUser, getUser, getUsers, getUsersByEmails};

@@ -3,7 +3,8 @@ const {createUser,
     updateUser,
     deleteUser,
     getUser,
-    getUsers,} = require('../controllers/user.js');
+    getUsers,
+getUsersByEmails } = require('../controllers/user.js');
 const User = require('../models/User.js');
 const router = express.Router();
 
@@ -21,5 +22,7 @@ router.get("/:id", getUser);
 
 //GET ALL
 router.get("/", getUsers);
+
+router.post("/byEmails", getUsersByEmails);
 
 module.exports = router;
