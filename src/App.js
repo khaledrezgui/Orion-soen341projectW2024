@@ -30,6 +30,9 @@ function App() {
         <Route path="/reservationlist" element={<ProtectedRoute><ReservationList /></ProtectedRoute>} />
         <Route path="/adminreservationlist" element={<ProtectedAdminRoute><AdminReservationList /></ProtectedAdminRoute>} />
         <Route path="/carmanagement" element={<ProtectedAdminRoute><CarManagement /></ProtectedAdminRoute>} />
+        
+        <Route path="/sharedreseervation" element={<ProtectedRoute><ReservationList /></ProtectedRoute>} />
+
         <Route path="/usermanagement" element={<ProtectedAdminRoute><UserManagement /></ProtectedAdminRoute>} />
         <Route path="/checkin/:reservationId" element={<ProtectedAdminRoute><CheckIn /></ProtectedAdminRoute>} />
         <Route path="/checkout/:reservationId" element={<ProtectedAdminRoute><CheckOut /></ProtectedAdminRoute>} />

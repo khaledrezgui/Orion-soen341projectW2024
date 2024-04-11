@@ -27,6 +27,9 @@ const NavBar = () => {
               <li className="nav-item">
                 <Link to="/reservationlist" className="nav-links">Your Reservations</Link>
               </li>
+              <li className="nav-item">
+                <Link to="/sharedreseervation" className="nav-links">Shared Reservations</Link>
+              </li>
               {isAdmin && (
                 <>
                 <li className="nav-item">
