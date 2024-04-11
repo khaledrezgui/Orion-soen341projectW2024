@@ -14,7 +14,7 @@ async function checkOverlappingReservations(carId, startDate, endDate) {
 
 // CREATE
 const createReservation = async (req, res) => {
-    const { user, car, startDate, endDate, gps, safetySeat, fuelService, insurance } = req.body;
+    const { user, car, startDate, endDate, gps, safetySeat, fuelService, insurance, sharedUsers, isShared } = req.body;
 
     const carDetails = await Car.findById(car);
     if (!carDetails) {
@@ -43,7 +43,9 @@ const createReservation = async (req, res) => {
             safetySeat,
             fuelService,
             insurance,
-            totalPrice // Include total price calculation with additional services
+            totalPrice, // Include total price calculation with additional services
+            isShared,
+            sharedUsers
         });
 
         await reservation.save();

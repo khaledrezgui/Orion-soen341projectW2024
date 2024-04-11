@@ -36,7 +36,7 @@ const CarCard = ({ car }) => {
   };
 
 
-  const bookReservation = async (startDate, startTime, endDate, endTime, gps, safetySeat, fuelService, insurance, creditCardDetails) => {
+  const bookReservation = async (startDate, startTime, endDate, endTime, gps, safetySeat, fuelService, insurance, creditCardDetails, shareReservation, sharedEmails) => {
     const token = localStorage.getItem('token');
     if (!token) {
       console.error('No token found');
@@ -47,6 +47,19 @@ const CarCard = ({ car }) => {
     const userId = decodedToken.id;
   
     try {
+
+      let sharedUserIds = [];
+      if (shareReservation && sharedEmails.length) {
+        try {
+          const response = await axios.post('/users/byEmails', { emails: sharedEmails }, { headers: { Authorization: `Bearer ${token}` } });
+          sharedUserIds = response.data; // Assuming the endpoint returns an array of user IDs directly
+        } catch (error) {
+          console.error('Error fetching user IDs:', error);
+          // Optionally handle the error, e.g., by setting a state variable to show an error message to the user
+          return;
+        }
+      }
+
       // First, update the user's credit card details
       const updateResponse = await axios.put(`/users/${userId}`, {
         creditCard: {
@@ -79,6 +92,8 @@ const CarCard = ({ car }) => {
         safetySeat,
         fuelService,
         insurance,
+        isShared: shareReservation,
+        sharedUsers: sharedUserIds
       }, {
         headers: {
           Authorization: `Bearer ${token}`,

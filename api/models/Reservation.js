@@ -37,7 +37,15 @@ const ReservationSchema = new mongoose.Schema({
     totalPrice: {
         type : Number,
         required: true
-    }
+    },
+    isShared: {
+        type: Boolean,
+        default: false
+    },
+    sharedUsers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
     
 });
 

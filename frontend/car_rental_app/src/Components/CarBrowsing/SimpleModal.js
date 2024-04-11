@@ -25,6 +25,8 @@ const SimpleModal = ({
   const [creditCardCVV, setCreditCardCVV] = useState('');
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
 
+  const [isShared, setIsShared] = useState(false);
+  const [sharedEmails, setSharedEmails] = useState(['']);
 
   const locationOptions = ['Concordia University Hall building H3G 2E9', 'Concordia Loyola Campus H4B 1R6', 'McGill University ', 'Montreal University H3T 1J4']  ;
   
@@ -78,91 +80,127 @@ const SimpleModal = ({
     return basePrice + additionalServicesPrice; // Return total price including additional services
   };
 
-  // When the confirm action is triggered
-  const handleConfirm = () => {
-    // Pass all the collected details to the onConfirm function
-    const totalPrice = calculateTotalPrice();
-    onConfirm(
-      startDate,
-      startTime,
-      endDate,
-      endTime,
-      gps,
-      safetySeat,
-      fuelService,
-      insurance,
-      {
-        name: creditCardName,
-        number: creditCardNumber,
-        cvv: creditCardCVV,
-        expiry: creditCardExpiry,
-      }
-    );
-    resetModal(); // Reset and close the modal after confirmation
-  };
+  // Function to handle adding new email fields
+const addEmailField = () => {
+  setSharedEmails([...sharedEmails, '']); // Add an empty string to the array
+};
+
+// Function to update specific email field based on index
+const updateEmailField = (index, value) => {
+  const updatedEmails = [...sharedEmails];
+  updatedEmails[index] = value;
+  setSharedEmails(updatedEmails);
+};
+
+const handleConfirm = async () => {
+  const totalPrice = calculateTotalPrice();
+  const shareReservation = isShared && sharedEmails.some(email => email.trim() !== '');
+
+  onConfirm(
+    startDate,
+    startTime,
+    endDate,
+    endTime,
+    gps,
+    safetySeat,
+    fuelService,
+    insurance,
+    {
+      name: creditCardName,
+      number: creditCardNumber,
+      cvv: creditCardCVV,
+      expiry: creditCardExpiry,
+    },
+    shareReservation, 
+    sharedEmails.filter(email => email.trim() !== '')
+    
+  );
+  resetModal();
+};
 
   if (!isOpen) return null;
   
     return (
       <div className="modal-container">
-      <h2 className="modal-header">{`${car.make} ${car.model} (${car.year})`} - Reservation Details</h2>
-      
-      {step === 1 && (
-        <div className="modal-content">
-          <div>
-            <label>Pickup Date: </label>
-            <input type="date" value={startDate} min={minDate} max={maxDate} onChange={(e) => setStartDate(e.target.value)} />
-            <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+        <h2 className="modal-header">{`${car.make} ${car.model} (${car.year})`} - Reservation Details</h2>
+        
+        {step === 1 && (
+          <div className="modal-content">
+            {/* Date and Time Inputs */}
+            <div>
+              <label>Pickup Date: </label>
+              <input type="date" value={startDate} min={minDate} max={maxDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+            </div>
+            <div>
+              <label>Return Date: </label>
+              <input type="date" value={endDate} min={minDate} max={maxDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+            </div>
+            
+            {/* Location Selectors */}
+            <div>
+              <label>Pick-up Location:</label>
+              <select value={pickLocation} onChange={(e) => setPickLocation(e.target.value)}>
+                {locationOptions.map((location) => (
+                  <option key={location} value={location}>{location}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label>Drop-off Location:</label>
+              <select value={dropLocation} onChange={(e) => setDropLocation(e.target.value)}>
+                {locationOptions.map((location) => (
+                  <option key={location} value={location}>{location}</option>
+                ))}
+              </select>
+            </div>
+            
+            {/* Shared Reservation Email Inputs */}
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={isShared}
+                  onChange={() => setIsShared(!isShared)}
+                />
+                Share Reservation
+              </label>
+              {isShared && sharedEmails.map((email, index) => (
+                <div key={index}>
+                  <label>Email {index + 1}: </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => updateEmailField(index, e.target.value)}
+                    placeholder="Enter participant's email"
+                  />
+                </div>
+              ))}
+              {isShared && (
+                <button type="button" onClick={addEmailField}>Add another email</button>
+              )}
+            </div>
+            
+            {/* Additional Services */}
+            <div>
+              <h3>Additional services (50$ per service):</h3>
+              <label><input type="checkbox" checked={gps} onChange={() => setGps(!gps)} /> GPS</label><br />
+              <label><input type="checkbox" checked={safetySeat} onChange={() => setSafetySeat(!safetySeat)} /> Child Safety Seat</label><br />
+              <label><input type="checkbox" checked={fuelService} onChange={() => setFuelService(!fuelService)} /> Fuel Service</label><br />
+              <label><input type="checkbox" checked={insurance} onChange={() => setInsurance(!insurance)} /> Insurance</label><br />
+            </div>
+            
+            <div className="modal-actions">
+              <button onClick={handleNext}>Next</button>
+              <button onClick={resetModal}>Cancel</button>
+            </div>
           </div>
-          <div>
-            <label>Return Date: </label>
-            <input type="date" value={endDate} min={minDate} max={maxDate} onChange={(e) => setEndDate(e.target.value)} />
-            <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
-          </div>
-          <div>
-          <label>Pick-up Location:</label>
-
-<select value={pickLocation} onChange={(e) => setPickLocation(e.target.value)}>
-  {locationOptions.map((location) => (
-    <option key={location} value={location}>{location}</option>
-  ))}
-</select>
-</div>
-<div>
-<label>Drop-off Location:</label>
-<select value={dropLocation} onChange={(e) => setDropLocation(e.target.value)}>
-  {locationOptions.map((location) => (
-    <option key={location} value={location}>{location}</option>
-  ))}
-</select>
-          </div>
-          <div>
-          <h3 style={{ textAlign: 'center', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Additional services (50$ per service):</h3>
-          <label>
-              <input type="checkbox" checked={gps} onChange={() => setGps(!gps)} />
-              GPS
-          </label><br />
-          <label>
-              <input type="checkbox" checked={safetySeat} onChange={() => setSafetySeat(!safetySeat)} />
-              Child Safety Seat
-          </label><br />
-          <label>
-              <input type="checkbox" checked={fuelService} onChange={() => setFuelService(!fuelService)} />
-              Fuel Service
-          </label><br />
-          <label>
-              <input type="checkbox" checked={insurance} onChange={() => setInsurance(!insurance)} />
-              Insurance
-          </label><br /> <br />
-          </div>
-  
-          <button onClick={handleNext}>Next</button>
-          <button onClick={resetModal}>Cancel</button>
-        </div>
         )}
-  
-  {step === 2 && (
-        <form onSubmit={(e) => e.preventDefault()} className="modal-form">
+    
+        {step === 2 && (
+          <form onSubmit={(e) => e.preventDefault()} className="modal-form">
+            {/* Confirmation and Payment Details */}
             <p>Total Price: ${calculateTotalPrice().toFixed(2)}</p>
             <label>Name on Card:</label>
             <input type="text" value={creditCardName} onChange={(e) => setCreditCardName(e.target.value)} />
@@ -172,9 +210,10 @@ const SimpleModal = ({
             <input type="text" value={creditCardCVV} maxLength="3" onChange={(e) => setCreditCardCVV(e.target.value)} />
             <label>Expiry Date (MM/YY):</label>
             <input type="text" value={creditCardExpiry} placeholder="MM/YY" onChange={(e) => setCreditCardExpiry(e.target.value)} />
-            <div>
-            <button type="button" onClick={handleBack}>Back</button>
-            <button type="button" onClick={handleConfirm}>Confirm</button>
+            
+            <div className="modal-actions">
+              <button type="button" onClick={handleBack}>Back</button>
+              <button type="button" onClick={handleConfirm}>Confirm</button>
             </div>
           </form>
         )}
