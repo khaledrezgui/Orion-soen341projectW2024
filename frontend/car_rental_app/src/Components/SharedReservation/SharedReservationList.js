@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 import ShareReservationCard from './ShareReservationCard';
-import PaymentModal from './PaymentModal'; // Import the PaymentModal component
 
 const SharedReservationList = () => {
     const [sharedReservations, setSharedReservations] = useState([]);
@@ -92,11 +91,6 @@ const SharedReservationList = () => {
             ) : (
                 <p>No shared reservations found</p>
             )}
-            <PaymentModal
-                isOpen={isPaymentModalOpen}
-                onClose={() => setIsPaymentModalOpen(false)}
-                onConfirm={onPaymentConfirm}
-            />
         </div>
     );
 };
