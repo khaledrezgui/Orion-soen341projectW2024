@@ -54,11 +54,24 @@ const ReservationList = () => {
         }
     };
 
-    const handleUpdate = (reservationId) => {
+    const handleUpdate = async (reservationId) => {
         const reservationToUpdate = reservations.find(r => r._id === reservationId);
-        setCurrentReservation(reservationToUpdate);
-        setModalOpen(true);
+        
+        try {
+            const carRes = await axios.get(`/cars/${reservationToUpdate.car}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            
+            setCars(prevCars => ({ ...prevCars, [reservationToUpdate.car]: carRes.data }));
+            
+            setCurrentReservation({ ...reservationToUpdate, car: carRes.data });
+            setModalOpen(true);
+        } catch (error) {
+            console.error('Failed to fetch car details:', error);
+        }
     };
+
+
 
     const onModalConfirm = async (newStartDate, newEndDate) => {
         if (!currentReservation) return;
@@ -72,10 +85,10 @@ const ReservationList = () => {
             });
 
             if (response.status === 200) {
-                const updatedReservations = reservations.map(reservation => 
-                    reservation._id === currentReservation._id ? response.data : reservation
-                );
-                setReservations(updatedReservations);
+                const updatedReservation = response.data;
+                setReservations(reservations.map(reservation =>
+                    reservation._id === currentReservation._id ? updatedReservation : reservation
+                ));
                 setModalOpen(false);
             }
         } catch (error) {
@@ -88,23 +101,24 @@ const ReservationList = () => {
             <h2>Your Reservations</h2>
             {reservations.length > 0 ? (
                 reservations.map((reservation) => (
-                    <ReservationCard
-                        key={reservation._id}
-                        reservation={reservation}
-                        car={cars[reservation.car]}
-                        onDelete={() => handleDelete(reservation._id)}
-                        onUpdate={() => handleUpdate(reservation._id)}
-                    />
+                        <ReservationCard
+                            key={reservation._id}
+                            reservation={reservation}
+                            car={cars[reservation.car]}
+                            onDelete={() => handleDelete(reservation._id)}
+                            onUpdate={() => handleUpdate(reservation._id)}
+                        />  
                 ))
             ) : (
                 <p>No reservations found</p>
             )}
-
-            <SimpleModal
-                isOpen={isModalOpen}
-                onClose={() => setModalOpen(false)}
-                onConfirm={onModalConfirm}
-            />
+            
+                <SimpleModal
+                    isOpen={isModalOpen}
+                    onClose={() => setModalOpen(false)}
+                    onConfirm={onModalConfirm}
+                    car={currentReservation ? currentReservation.car : null}
+                />
         </div>
     );
 };
