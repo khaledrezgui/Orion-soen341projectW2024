@@ -35,9 +35,14 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      - name: unit test 
+        run: npm test
+      
       # build the react app
       - name: Build
         run: npm run 
+
+     
 
       # deploy the react app to github pages
       - name: Deploy
