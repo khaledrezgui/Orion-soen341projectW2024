@@ -33,11 +33,13 @@ const SharedReservationCard = ({ reservation, car, onCancel }) => {
   
     try {
       // Create a new list of sharedUsers without the current userId
-      const updatedSharedUsers = reservation.sharedUsers.filter(user => user !== userId);
+      const updatedSharedUsers = reservation.sharedUsers.filter(sharedUserId => sharedUserId !== userId);
   
+      console.log(updatedSharedUsers);
+      debugger;
       // Update the reservation on the backend
       const updateResponse = await axios.put(`/reservations/${reservation._id}`, {
-        sharedUsers: updatedSharedUsers.map(user => user.$oid), // Ensure to map back to a list of IDs
+        sharedUsers: updatedSharedUsers,
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
