@@ -69,6 +69,8 @@ const SharedReservationCard = ({ reservation, car, onCancel }) => {
   // Handle cancel action
   const handleCancel = () => {
     onCancel(reservation._id); // Assuming onCancel needs reservation ID
+    removeSharedUser();
+    window.location.reload()
   };
 
   const onPaymentConfirm = async (paymentDetails) => {
