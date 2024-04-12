@@ -54,10 +54,21 @@ const AdminReservationList = () => {
         }
     };
 
-    const handleUpdate = (reservationId) => {
+    const handleUpdate = async (reservationId) => {
         const reservationToUpdate = reservations.find(r => r._id === reservationId);
-        setCurrentReservation(reservationToUpdate);
-        setModalOpen(true);
+        
+        try {
+            const carRes = await axios.get(`/cars/${reservationToUpdate.car}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            
+            setCars(prevCars => ({ ...prevCars, [reservationToUpdate.car]: carRes.data }));
+            
+            setCurrentReservation({ ...reservationToUpdate, car: carRes.data });
+            setModalOpen(true);
+        } catch (error) {
+            console.error('Failed to fetch car details:', error);
+        }
     };
 
     const onModalConfirm = async (newStartDate, newEndDate) => {
@@ -104,6 +115,8 @@ const AdminReservationList = () => {
                 isOpen={isModalOpen}
                 onClose={() => setModalOpen(false)}
                 onConfirm={onModalConfirm}
+                car={currentReservation ? currentReservation.car : null}
+
             />
         </div>
     );
