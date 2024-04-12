@@ -16,6 +16,7 @@ import CheckOut from './Components/ReservationLIst/AdminReservationLIst/CheckOut
 import NavBar from './Components/NavBar/NavBar';
 import AdminConfirmation from './Components/ReservationLIst/AdminReservationLIst/CheckIn/AdminConfirmation';
 import CheckOutConfirmation from './Components/ReservationLIst/AdminReservationLIst/CheckOut/CheckOutConfirmation';
+import SharedReservationList from './Components/SharedReservation/SharedReservationList';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
         <Route path="/adminreservationlist" element={<ProtectedAdminRoute><AdminReservationList /></ProtectedAdminRoute>} />
         <Route path="/carmanagement" element={<ProtectedAdminRoute><CarManagement /></ProtectedAdminRoute>} />
         
-        <Route path="/sharedreseervation" element={<ProtectedRoute><ReservationList /></ProtectedRoute>} />
+        <Route path="/sharedreseervation" element={<ProtectedRoute><SharedReservationList /></ProtectedRoute>} />
 
         <Route path="/usermanagement" element={<ProtectedAdminRoute><UserManagement /></ProtectedAdminRoute>} />
         <Route path="/checkin/:reservationId" element={<ProtectedAdminRoute><CheckIn /></ProtectedAdminRoute>} />
