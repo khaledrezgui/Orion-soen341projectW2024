@@ -7,6 +7,7 @@ import CarBrowsing from './Components/CarBrowsing/CarBrowsing';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import ProtectedAdminRoute from './Components/ProtectedRoute/ProtectedAdminRoute';
 import Confirmation from './Components/Confirmation/Confirmation';
+import ReservationConfirmation from './Components/SharedReservation/ReservationCofirmation';
 import ReservationList from './Components/ReservationLIst/ReservationList';
 import CarManagement from './Components/CarManagement/CarManagement';
 import UserManagement from './Components/UserManagement/UserManagement';
@@ -33,6 +34,8 @@ function App() {
         <Route path="/carmanagement" element={<ProtectedAdminRoute><CarManagement /></ProtectedAdminRoute>} />
         
         <Route path="/sharedreseervation" element={<ProtectedRoute><SharedReservationList /></ProtectedRoute>} />
+
+        <Route path="/sharedreseervationconfirmation/:reservationId" element={<ProtectedRoute><ReservationConfirmation /></ProtectedRoute>} />
 
         <Route path="/usermanagement" element={<ProtectedAdminRoute><UserManagement /></ProtectedAdminRoute>} />
         <Route path="/checkin/:reservationId" element={<ProtectedAdminRoute><CheckIn /></ProtectedAdminRoute>} />

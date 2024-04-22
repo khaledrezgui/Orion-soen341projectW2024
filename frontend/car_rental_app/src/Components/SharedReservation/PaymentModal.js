@@ -31,11 +31,11 @@ const PaymentModal = ({ isOpen, onClose, onConfirm }) => {
           </div>
           <div>
             <label>Card Number:</label>
-            <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} required />
+            <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} maxLength="16" required />
           </div>
           <div>
             <label>CVV:</label>
-            <input type="text" value={cvv} onChange={(e) => setCvv(e.target.value)} required />
+            <input type="text" value={cvv} onChange={(e) => setCvv(e.target.value)} maxLength="3" required />
           </div>
           <div>
             <label>Expiry Date:</label>

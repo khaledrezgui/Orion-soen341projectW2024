@@ -60,34 +60,40 @@ const createReservation = async (req, res) => {
 // UPDATE
 const updateReservation = async (req, res) => {
     try {
-        const reservationToUpdate = await Reservation.findById(req.params.id);
+        const { startDate, endDate, gps, safetySeat, fuelService, insurance, sharedUsers } = req.body;
+
+        const reservationToUpdate = await Reservation.findById(req.params.id).populate('car');
         if (!reservationToUpdate) {
             return res.status(404).send({ message: 'Reservation not found.' });
         }
 
-        const carDetails = await Car.findById(reservationToUpdate.car);
-        if (!carDetails) {
-            return res.status(404).send({ message: 'Car not found.' });
+        // Update fields if they exist in req.body
+        if (startDate) reservationToUpdate.startDate = new Date(startDate);
+        if (endDate) reservationToUpdate.endDate = new Date(endDate);
+        if (gps !== undefined) reservationToUpdate.gps = gps;
+        if (safetySeat !== undefined) reservationToUpdate.safetySeat = safetySeat;
+        if (fuelService !== undefined) reservationToUpdate.fuelService = fuelService;
+        if (insurance !== undefined) reservationToUpdate.insurance = insurance;
+
+        // Update sharedUsers directly without mapping to ObjectId,
+        // assuming sharedUsers is already provided as an array of ObjectId strings from the client.
+        if (sharedUsers !== undefined) {
+            reservationToUpdate.sharedUsers = sharedUsers;
+            reservationToUpdate.isShared = sharedUsers.length > 0;
         }
 
-        reservationToUpdate.startDate = req.body.startDate ? new Date(req.body.startDate) : reservationToUpdate.startDate;
-        reservationToUpdate.endDate = req.body.endDate ? new Date(req.body.endDate) : reservationToUpdate.endDate;
-        reservationToUpdate.gps = req.body.gps !== undefined ? req.body.gps : reservationToUpdate.gps;
-        reservationToUpdate.safetySeat = req.body.safetySeat !== undefined ? req.body.safetySeat : reservationToUpdate.safetySeat;
-        reservationToUpdate.fuelService = req.body.fuelService !== undefined ? req.body.fuelService : reservationToUpdate.fuelService;
-        reservationToUpdate.insurance = req.body.insurance !== undefined ? req.body.insurance : reservationToUpdate.insurance;
-
+        // Recalculate the total price based on possibly updated values
         const durationInHours = (reservationToUpdate.endDate - reservationToUpdate.startDate) / (1000 * 60 * 60);
-        const additionalServicesPrice = (reservationToUpdate.gps + reservationToUpdate.safetySeat + reservationToUpdate.fuelService + reservationToUpdate.insurance) * 50;
-        reservationToUpdate.totalPrice = durationInHours * carDetails.price + additionalServicesPrice;
+        const additionalServicesPrice = (gps ? 1 : 0) + (safetySeat ? 1 : 0) + (fuelService ? 1 : 0) + (insurance ? 1 : 0) * 50;
+        reservationToUpdate.totalPrice = durationInHours * reservationToUpdate.car.price + additionalServicesPrice;
 
         await reservationToUpdate.save();
         res.status(200).json(reservationToUpdate);
     } catch (error) {
-        res.status(400).send(error);
+        console.error('Error updating reservation:', error);
+        res.status(400).send({ message: 'Error updating reservation', error: error.message });
     }
 };
-
 
 
 // DELETE
